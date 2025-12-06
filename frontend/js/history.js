@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     
     // 1. Fetch Real Data
     try {
-        const res = await fetch('http://localhost:4000/api/truth/history');
+        const res = await fetch('/api/truth/history');
         const data = await res.json();
         
         if (data.success && data.history.length > 0) {

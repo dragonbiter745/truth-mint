@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             try {
                 // CALL REAL BACKEND
-                const res = await fetch(`http://localhost:4000/api/truth/proof/${inputVal}`);
+                const res = await fetch(`/api/truth/proof/${inputVal}`);
                 const data = await res.json();
 
                 if (data.success) {

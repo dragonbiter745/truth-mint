@@ -83,7 +83,7 @@ document.addEventListener('DOMContentLoaded', () => {
         
         try {
             // CALL REAL BACKEND
-            const response = await fetch('http://localhost:4000/api/truth/legal', {
+            const response = await fetch('/api/truth/legal', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({

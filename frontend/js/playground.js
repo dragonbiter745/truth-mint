@@ -54,7 +54,7 @@ document.addEventListener('DOMContentLoaded', () => {
             logMessage(`[API] sending query to Backend: ${query}...`, 'log-info');
             
             // Force URL to localhost:4000
-            const genRes = await fetch('http://localhost:4000/api/ai/generate', {
+            const genRes = await fetch('/api/ai/generate', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ topic: query })
@@ -69,7 +69,7 @@ document.addEventListener('DOMContentLoaded', () => {
             // --- STEP 2: VERIFICATION & PROOF ---
             logMessage(`[CHAIN] Requesting Proof from TruthHub...`, 'log-warning');
 
-            const verifyRes = await fetch('http://localhost:4000/api/truth/verify', {
+            const verifyRes = await fetch('/api/truth/verify', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ 
@@ -90,7 +90,7 @@ document.addEventListener('DOMContentLoaded', () => {
             logMessage(`[WALLET] Preparing Mint Transaction...`, 'log-info');
             
             // Generate Metadata Link
-            const metaRes = await fetch('http://localhost:4000/api/nft/metadata', {
+            const metaRes = await fetch('/api/nft/metadata', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ 

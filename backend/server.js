@@ -30,7 +30,8 @@ app.get("*", (req, res) => {
     }
 });
 
-app.listen(PORT, () => {
+app.listen(PORT, '0.0.0.0',() => {
   console.log(`🚀 TruthMint Server running on http://localhost:${PORT}`);
   console.log(`🔗 Blockchain Network: Flare Coston2`);
+  console.log(`📡 Accepting external tunnel connections`);
 });

@@ -1,41 +1,67 @@
 // frontend/js/dashboard.js
 
 document.addEventListener('DOMContentLoaded', () => {
-    const activeKeySpan = document.getElementById('active-api-key');
-    const keyDisplay = activeKeySpan.parentNode;
-    const [showBtn, copyBtn] = keyDisplay.querySelectorAll('.btn-small');
-    
-    // Simulate a full API Key
-    const fullKey = 'sk_live_v2_f1d2c3e4b5a6c7d8e9f0a1b2c3d4e5f6g7h8i9j0k1l2m3n4o5p6q7r8s9t0u1v2w3x4y5z61b7c';
-    const hiddenKey = 'sk_live_••••••••1b7c';
-    let isKeyVisible = false;
+    const keyDisplay = document.getElementById('active-api-key');
+    const generateBtn = document.querySelector('.btn-neon-glow'); // The "Generate New Key" button
+    const copyBtn = document.querySelector('.btn-copy-key');
+    const showBtn = document.querySelector('.api-key-display .btn-secondary'); // The "Show" button
 
-    // Toggle Show/Hide Key
-    showBtn.addEventListener('click', () => {
-        isKeyVisible = !isKeyVisible;
-        if (isKeyVisible) {
-            activeKeySpan.textContent = fullKey;
-            showBtn.textContent = '🙈 Hide';
-        } else {
-            activeKeySpan.textContent = hiddenKey;
-            showBtn.textContent = '👁️ Show';
-        }
-    });
+    let currentKey = "No Key Generated";
 
-    // Copy Key Logic
-    copyBtn.addEventListener('click', () => {
-        const keyToCopy = fullKey; // Always copy the full key
-        
-        navigator.clipboard.writeText(keyToCopy).then(() => {
-            const originalText = copyBtn.textContent;
-            copyBtn.textContent = 'Copied!';
-            showToast('Full API key copied to clipboard.', 'success');
-            
-            setTimeout(() => {
-                copyBtn.textContent = originalText;
-            }, 1500);
-        }).catch(err => {
-            showToast('Failed to copy key.', 'error');
+    // 1. Generate Key Logic
+    if (generateBtn) {
+        generateBtn.addEventListener('click', async () => {
+            try {
+                generateBtn.textContent = "Generating...";
+                generateBtn.disabled = true;
+
+                // Call Backend
+                const response = await fetch('/api/auth/generate-key', { method: 'POST' });
+                const data = await response.json();
+
+                if (data.success) {
+                    currentKey = data.apiKey;
+                    keyDisplay.textContent = currentKey;
+                    keyDisplay.style.color = "#00F0FF"; // Neon Blue
+                    
+                    showToast("New Agent API Key Generated!", "success");
+                    
+                    // Simulate "x402 Protocol" activation
+                    setTimeout(() => {
+                        showToast("x402 Payment Channel: Active", "info");
+                    }, 1000);
+                }
+            } catch (e) {
+                console.error(e);
+                showToast("Failed to generate key", "error");
+            } finally {
+                generateBtn.textContent = "Generate New Key";
+                generateBtn.disabled = false;
+            }
         });
-    });
+    }
+
+    // 2. Copy Logic
+    if (copyBtn) {
+        copyBtn.addEventListener('click', () => {
+            if (!currentKey || currentKey === "No Key Generated") return;
+            navigator.clipboard.writeText(currentKey);
+            showToast("Key copied to clipboard", "success");
+        });
+    }
+    
+    // 3. Show/Hide Logic
+    if (showBtn) {
+        let visible = true;
+        showBtn.addEventListener('click', () => {
+            visible = !visible;
+            if (visible) {
+                keyDisplay.textContent = currentKey;
+                showBtn.textContent = "👁️ Hide";
+            } else {
+                keyDisplay.textContent = currentKey.substring(0, 8) + "•••••••••";
+                showBtn.textContent = "👁️ Show";
+            }
+        });
+    }
 });
