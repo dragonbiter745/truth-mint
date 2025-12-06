@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TRUTH API | Developer Documentation</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="styles/_vars.css">
+    <link rel="stylesheet" href="styles/base.css">
+    <link rel="stylesheet" href="styles/components.css">
+    <link rel="stylesheet" href="styles/layout.css">
+    <link rel="stylesheet" href="styles/animations.css">
+
+</head>
+<body>
+    
+    <nav id="main-navbar" class="glass-nav floating-nav">
+    <div class="nav-container container">
+        <div class="nav-brand">
+            <a href="index.html">
+                <span class="mono-text nav-logo-text">TRUTH</span><span class="nav-logo-api">API</span>
+            </a>
+        </div>
+
+        <ul class="nav-links">
+            <li><a href="playground.html" class="nav-link nav-link-cta">Run Live Query</a></li>
+            <li><a href="verify.html" class="nav-link">Verify Proof</a></li>
+            <li><a href="legal.html" class="nav-link">Legal Proofs</a></li> 
+            <li><a href="accounting.html" class="nav-link">Audit Trail</a></li>
+            <li><a href="history.html" class="nav-link">History</a></li>
+            <li><a href="docs.html" class="nav-link">Docs</a></li>
+            <li><a href="dashboard.html" class="nav-link">Agent Cockpit</a></li>
+        </ul>
+        
+        <div class="nav-controls">
+            <button id="wallet-connect-btn" class="btn btn-secondary btn-small mono-text">
+                <span id="wallet-status-text">🔌 Connect Wallet</span>
+            </button>
+            
+            <button id="theme-switcher" class="theme-toggle-btn" aria-label="Toggle Dark/Light Mode">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 3C11.6667 3 11.3333 3 11 3C16.5 3 21 7.5 21 13C21 13.3333 21 13.6667 21 14C19.5 15.5 17.5 16.5 15.5 16.5C11.5 16.5 8.5 13.5 8.5 9.5C8.5 7.5 9.5 5.5 11 4C11.3333 4 11.6667 4 12 4C12 4 12 3 12 3Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </button>
+        </div>
+    </div>
+</nav>
+    
+    <div class="docs-layout">
+        
+        <aside class="docs-sidebar">
+            <nav id="docs-nav" class="docs-nav">
+                <h3>Getting Started</h3>
+                <ul>
+                    <li><a href="#intro">Introduction</a></li>
+                    <li><a href="#auth">Authentication</a></li>
+                </ul>
+
+                <h3>API Endpoints</h3>
+                <ul>
+                    <li><a href="#get-price">GET /price/ftso</a></li>
+                    <li><a href="#get-attestation">POST /attest/event</a></li>
+                    <li><a href="#get-proof">GET /proof/{txHash}</a></li>
+                </ul>
+
+                <h3>Data Schemas</h3>
+                <ul>
+                    <li><a href="#proof-obj">Canonical Proof Object</a></li>
+                    <li><a href="#errors">Error Codes</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <main class="docs-content">
+            <h1 class="page-title mono-text">API Documentation</h1>
+            <p class="section-subtitle">The programmatic interface to cryptographically verifiable data for AI Agents.</p>
+
+            <section id="intro" class="doc-section">
+                <h2 class="doc-heading">Introduction</h2>
+                <p>The Truth API is a RESTful service designed for seamless integration with large language models and autonomous agents. Every response includes a canonical proof object anchored on the Flare blockchain.</p>
+                <div class="code-example-block">
+                    <div class="code-header">
+                        <span class="language-tag mono-text">CURL</span>
+                        <button class="copy-btn btn-small" data-code-target="#code-1">Copy</button>
+                    </div>
+                    <pre class="code-content"><code id="code-1" class="language-curl mono-text">curl -X GET 'https://api.truth.flare/price/ftso?asset=BTC/USD' \
+  -H 'X-API-KEY: your_api_key'</code></pre>
+                </div>
+                <p>All endpoints require a valid **X-API-KEY** passed in the header. API keys can be managed in the Agent Cockpit.</p>
+            </section>
+            
+            <section id="auth" class="doc-section">
+                <h2 class="doc-heading">Authentication</h2>
+                <p>Authentication is handled via a single, long-lived API key (X-API-KEY) managed by the user's Smart Contract wallet on Flare. Keys are non-expiring but can be manually revoked or rotated via the Dashboard.</p>
+                <div class="code-example-block">
+                    <div class="code-header">
+                        <span class="language-tag mono-text">JAVASCRIPT</span>
+                        <button class="copy-btn btn-small" data-code-target="#code-auth">Copy</button>
+                    </div>
+                    <pre class="code-content"><code id="code-auth" class="language-js mono-text">const apiKey = 'sk_live_...'; // Retrieved from Dashboard
+const url = 'https://api.truth.flare/price/ftso?asset=ETH/USD';
+
+fetch(url, {
+    method: 'GET',
+    headers: {
+        'X-API-KEY': apiKey,
+        'Content-Type': 'application/json'
+    }
+}).then(res => res.json()).then(data => console.log(data));</code></pre>
+                </div>
+            </section>
+            
+            <section id="get-price" class="doc-section">
+                <h2 class="doc-heading">GET /price/ftso</h2>
+                <p class="endpoint-detail">Retrieves the latest verified price feed (within the last 90 seconds) using the Flare Time Series Oracle (FTSO). This is the fastest query type.</p>
+                
+                <h3 class="doc-subheading">Parameters</h3>
+                <div class="param-table">
+                    <span class="param-name mono-text">asset</span>
+                    <span class="param-type">String (Required)</span>
+                    <span class="param-desc">The asset pair to query (e.g., BTC/USD, ETH/USDT).</span>
+                </div>
+
+                <h3 class="doc-subheading">Example Response (Success)</h3>
+                <div class="code-example-block">
+                    <div class="code-header">
+                        <span class="language-tag mono-text">JSON</span>
+                        <button class="copy-btn btn-small" data-code-target="#code-2">Copy</button>
+                    </div>
+                    <pre class="code-content"><code id="code-2" class="language-json mono-text">{
+    "status": "success",
+    "data": {
+        "value": "3561.88",
+        "asset": "ETH/USD",
+        "proof": {
+            "signature": "0x8a92e10c...",
+            "txHash": "0x12c4d678...",
+            "timestamp": 1733367900
+        }
+    }
+}</code></pre>
+                </div>
+            </section>
+            
+            <section id="get-attestation" class="doc-section">
+                <h2 class="doc-heading">POST /attest/event</h2>
+                <p class="endpoint-detail">Initiates a request to the Flare Data Connector (FDC) to attest to a specific event or data hash. This endpoint triggers an on-chain anchoring process and is subject to network fees.</p>
+                
+                <h3 class="doc-subheading">Request Body</h3>
+                <div class="param-table">
+                    <span class="param-name mono-text">dataHash</span>
+                    <span class="param-type">String (Required)</span>
+                    <span class="param-desc">The unique SHA-256 hash of the data or event to be attested.</span>
+                    <span class="param-name mono-text">eventID</span>
+                    <span class="param-type">String (Optional)</span>
+                    <span class="param-desc">A custom ID for tracking complex attestations (Legal Contract ID, Financial Period, etc.).</span>
+                </div>
+
+                <h3 class="doc-subheading">Example Request (CURL)</h3>
+                <div class="code-example-block">
+                    <div class="code-header">
+                        <span class="language-tag mono-text">CURL</span>
+                        <button class="copy-btn btn-small" data-code-target="#code-3">Copy</button>
+                    </div>
+                    <pre class="code-content"><code id="code-3" class="language-curl mono-text">curl -X POST 'https://api.truth.flare/attest/event' \
+  -H 'X-API-KEY: your_api_key' \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "dataHash": "0x4ae891c3d1f0d...",
+    "eventID": "LegalContract-1024"
+  }'</code></pre>
+                </div>
+            </section>
+
+            <section id="get-proof" class="doc-section">
+                <h2 class="doc-heading">GET /proof/{txHash}</h2>
+                <p class="endpoint-detail">Retrieves the full canonical proof object, including Oracle Signatures, associated with a specific Flare transaction hash (TX Anchor).</p>
+            </section>
+            
+            <section id="proof-obj" class="doc-section">
+                <h2 class="doc-heading">Canonical Proof Object Schema</h2>
+                <p>The standard structure for verifiable truth returned by the Truth API. This object contains the cryptographic evidence necessary for local signature verification.</p>
+                
+                <h3 class="doc-subheading">Schema Definition</h3>
+                <div class="code-example-block">
+                    <div class="code-header">
+                        <span class="language-tag mono-text">JSON</span>
+                        <button class="copy-btn btn-small" data-code-target="#code-schema">Copy</button>
+                    </div>
+                    <pre class="code-content"><code id="code-schema" class="language-json mono-text">{
+    "proofId": "uint256 (BigNumber)",
+    "dataValue": "string",
+    "timestamp": "uint64 (Epoch)",
+    "txHash": "string (0x...)",
+    "oracleSource": "string (FTSO/FDC)",
+    "signature": "string (E-25519 or other elliptic curve sig)"
+}</code></pre>
+                </div>
+            </section>
+            
+            <section id="errors" class="doc-section">
+                <h2 class="doc-heading">Error Codes</h2>
+                <p>Common HTTP error codes returned by the API.</p>
+                <div class="param-table">
+                    <span class="param-name mono-text">401</span>
+                    <span class="param-type">Unauthorized</span>
+                    <span class="param-desc">Invalid or missing X-API-KEY. Check dashboard for active key.</span>
+                    <span class="param-name mono-text">429</span>
+                    <span class="param-type">Rate Limit</span>
+                    <span class="param-desc">Too many requests in a short time. Slow down automated agent queries.</span>
+                    <span class="param-name mono-text">504</span>
+                    <span class="param-type">Gateway Timeout</span>
+                    <span class="param-desc">Backend failed to receive proof confirmation from the blockchain within the timeout (possible high gas fees or congestion).</span>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <footer class="glass-footer">
+        <div class="container footer-grid">
+            <div class="footer-brand">
+                <span class="mono-text footer-logo-text">TRUTH</span><span class="footer-logo-api">API</span>
+                <p class="copyright-text">
+                    &copy; 2025 Truth API for AI Agents.<br>
+                    Powered by the Flare Ecosystem.
+                </p>
+            </div>
+            <div class="footer-links">
+                <h4 class="footer-heading mono-text">Product</h4>
+                <ul>
+                    <li><a href="playground.html">Run Live Query</a></li>
+                    <li><a href="verify.html">Verify Proof</a></li>
+                    <li><a href="legal.html">Legal Proofs</a></li> 
+                    <li><a href="accounting.html">Audit Trail</a></li>
+                    <li><a href="history.html">Proof History</a></li>
+                    <li><a href="dashboard.html">Agent Cockpit</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h4 class="footer-heading mono-text">Resources</h4>
+                <ul>
+                    <li><a href="docs.html">Developer Documentation</a></li>
+                    <li><a href="#">Flare Explorer</a></li>
+                    <li><a href="#">Flare Documentation</a></li>
+                </ul>
+            </div>
+            <div class="footer-social">
+                <h4 class="footer-heading mono-text">Code & Community</h4>
+                <div class="social-icons">
+                    <a href="#" aria-label="GitHub Repository" title="GitHub"><span class="social-icon">🐙 GitHub</span></a>
+                    <a href="#" aria-label="Flare Twitter" title="X/Twitter"><span class="social-icon">🚀 X/Twitter</span></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom-bar">
+            <div class="container mono-text">
+                <span>Proof of Truth &bull; Cryptographically Secured &bull; Decentralized by Design</span>
+            </div>
+        </div>
+    </footer>
+    <div id="toast-container"></div>
+    <script src="https://unpkg.com/ethers@5.7.2/dist/ethers.umd.min.js" type="application/javascript"></script>
+    <script src="js/app.js"></script>
+    <script src="js/ui.js"></script>
+    <script src="js/theme.js"></script>
+    <script src="js/modal.js"></script>
+    <script src="js/docs.js"></script> 
+    
+    <div id="global-modal-overlay" class="modal-overlay">
+    </div>
+</body>
+</html>

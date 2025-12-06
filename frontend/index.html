@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TRUTH API | Proof-of-Truth for Web3 Data</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="styles/_vars.css">
+    <link rel="stylesheet" href="styles/base.css">
+    <link rel="stylesheet" href="styles/components.css">
+    <link rel="stylesheet" href="styles/layout.css">
+    <link rel="stylesheet" href="styles/animations.css">
+
+</head>
+<body>
+    
+    <nav id="main-navbar" class="glass-nav floating-nav">
+        <div class="nav-container container">
+            <div class="nav-brand">
+                <a href="index.html">
+                    <span class="mono-text nav-logo-text">TRUTH</span><span class="nav-logo-api">API</span>
+                </a>
+            </div>
+            
+            <ul class="nav-links">
+                <li><a href="playground.html" class="nav-link nav-link-cta">Run Live Query</a></li>
+                <li><a href="verify.html" class="nav-link">Verify Proof</a></li>
+                <li><a href="legal.html" class="nav-link">Legal Proofs</a></li> 
+                <li><a href="accounting.html" class="nav-link">Audit Trail</a></li>
+                <li><a href="history.html" class="nav-link">History</a></li>
+                <li><a href="docs.html" class="nav-link">Docs</a></li>
+                <li><a href="dashboard.html" class="nav-link">Agent Cockpit</a></li>
+            </ul>
+            
+            <div class="nav-controls">
+                <button id="wallet-connect-btn" class="btn btn-secondary btn-small mono-text">
+                    <span id="wallet-status-text">🔌 Connect Wallet</span>
+                </button>
+                
+                <button id="theme-switcher" class="theme-toggle-btn" aria-label="Toggle Dark/Light Mode">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 3C11.6667 3 11.3333 3 11 3C16.5 3 21 7.5 21 13C21 13.3333 21 13.6667 21 14C19.5 15.5 17.5 16.5 15.5 16.5C11.5 16.5 8.5 13.5 8.5 9.5C8.5 7.5 9.5 5.5 11 4C11.3333 4 11.6667 4 12 4C12 4 12 3 12 3Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </nav>
+    
+    <main>
+        <section id="hero-section" class="hero">
+            <div class="hero-content container">
+                <div class="hero-text-block">
+                    <h1 class="hero-title text-gradient">
+                        The Truth Machine.<br>
+                        Provable AI, Verified on Chain.
+                    </h1>
+                    <p class="hero-subtitle">
+                        TRUTH API is the first infrastructure to generate **cryptographically verifiable proofs** for any AI query, powered by decentralized Oracle Networks. Stop guessing, start verifying.
+                    </p>
+                    <div class="hero-cta-group">
+                        <a href="playground.html" class="btn btn-primary btn-neon-glow">
+                            Run First Query <span class="mono-text">></span>
+                        </a>
+                        <a href="docs.html" class="btn btn-secondary btn-glass">
+                            Read the Documentation
+                        </a>
+                    </div>
+                    <div class="hero-stats">
+                        <span class="stat-item mono-text">
+                            <span class="stat-number">10M+</span> Proven Queries
+                        </span>
+                        <span class="stat-item mono-text">
+                            <span class="stat-number">3ms</span> Avg. Proof Latency
+                        </span>
+                        <span class="stat-item mono-text">
+                            <span class="stat-number">FDC/FTSO</span> Integrated
+                        </span>
+                    </div>
+                </div>
+                <div class="hero-visual">
+                    <div id="data-stream-visualization">
+                        </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="explainer-section" class="section">
+            <div class="container">
+                <h2 class="mono-text text-center scroll-fade-in">How The Truth is Forged</h2>
+                <p class="text-center section-subtitle scroll-fade-in" style="animation-delay: 0.1s;">
+                    Decentralized verification is a three-stage cryptographic process.
+                </p>
+                <div class="step-process-grid">
+                    <div class="step-card glass-card scroll-fade-in" style="animation-delay: 0.2s;">
+                        <div class="step-icon step-icon-1"><span class="mono-text">01</span></div>
+                        <h3>Request: The AI Query</h3>
+                        <p>An AI agent asks for external data (e.g., "What is the BTC price?" or "Did event X occur?"). The request is routed to the decentralized Flare Oracle network.</p>
+                        <div class="step-diagram-link mono-text">[AI Agent] &rarr; [Truth API]</div>
+                    </div>
+                    <div class="step-arrow scroll-fade-in" style="animation-delay: 0.3s;">
+                        <svg width="60" height="20" viewBox="0 0 60 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M5 10H55M55 10L45 5M55 10L45 15" stroke="var(--color-electric-purple)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                    <div class="step-card glass-card scroll-fade-in" style="animation-delay: 0.4s;">
+                        <div class="step-icon step-icon-2"><span class="mono-text">02</span></div>
+                        <h3>Verify: FTSO & Attestation</h3>
+                        <p>The Flare Time Series Oracle (FTSO) or Flare Data Connector (FDC) sources, aggregates, and cryptographically signs the data based on consensus from 100+ decentralized providers.</p>
+                        <div class="step-diagram-link mono-text">[Oracle] + [FTSO/FDC] &rarr; [Consensus]</div>
+                    </div>
+                    <div class="step-arrow scroll-fade-in" style="animation-delay: 0.5s;">
+                        <svg width="60" height="20" viewBox="0 0 60 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M5 10H55M55 10L45 5M55 10L45 15" stroke="var(--color-electric-purple)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                    <div class="step-card glass-card scroll-fade-in" style="animation-delay: 0.6s;">
+                        <div class="step-icon step-icon-3"><span class="mono-text">03</span></div>
+                        <h3>Prove: Anchor & Return</h3>
+                        <p>The verified data is anchored to a truth contract on the Flare blockchain. A proof object (signature + timestamp) is generated and returned to the querying AI agent.</p>
+                        <div class="step-diagram-link mono-text">[Proof] &rarr; [Agent Response]</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="data-ticker-section" class="section-full-width scroll-fade-in" style="animation-delay: 0.8s;">
+            <h2 class="ticker-title mono-text text-center">Live Proof Stream</h2>
+            <p class="text-center section-subtitle" style="margin-bottom: var(--space-lg);">
+                Verified cryptographic proofs flow in real-time, 24/7.
+            </p>
+            <div class="data-ticker-strip">
+                <div class="data-ticker-content" id="data-ticker-content-1">
+                    <div class="data-stream-card glass-card">
+                        <span class="stream-label">BTC/USD Price</span>
+                        <span class="stream-value mono-text">$68,450.21</span>
+                        <span class="stream-proof-status verified-success">✓ FTSO Verified</span>
+                    </div>
+                    <div class="data-stream-card glass-card">
+                        <span class="stream-label">ETH/USD Price</span>
+                        <span class="stream-value mono-text">$3,561.88</span>
+                        <span class="stream-proof-status verified-success">✓ FTSO Verified</span>
+                    </div>
+                    <div class="data-stream-card glass-card">
+                        <span class="stream-label">Flare Event Attestation</span>
+                        <span class="stream-value mono-text">0x34aD...bB2F</span>
+                        <span class="stream-proof-status verified-warning">! New FDC Proof</span>
+                    </div>
+                    <div class="data-stream-card glass-card">
+                        <span class="stream-label">Verified Timestamp</span>
+                        <span class="stream-value mono-text">1733367900</span>
+                        <span class="stream-proof-status verified-success">✓ Proof Signed</span>
+                    </div>
+                    <div class="data-stream-card glass-card">
+                        <span class="stream-label">AI Query Hash</span>
+                        <span class="stream-value mono-text">0xA34C...11D9</span>
+                        <span class="stream-proof-status verified-success">✓ Proof Anchored</span>
+                    </div>
+                </div>
+                <div class="data-ticker-content" id="data-ticker-content-2" aria-hidden="true"></div>
+            </div>
+        </section>
+
+        <section id="tech-stack-section" class="section">
+            <div class="container">
+                <h2 class="mono-text text-center scroll-fade-in">Backed by the Flare Ecosystem</h2>
+                <p class="text-center section-subtitle scroll-fade-in" style="animation-delay: 0.1s;">
+                    Decentralized truth requires decentralized infrastructure.
+                </p>
+                <div class="tech-bento-grid">
+                    <div class="bento-item bento-item-lg glass-card scroll-fade-in" style="animation-delay: 0.3s;">
+                        <div class="bento-icon bento-icon-purple"><span class="mono-text">FTSO</span></div>
+                        <h3>Flare Time Series Oracle</h3>
+                        <p>The core mechanism providing highly decentralized, low-latency, and accurately time-series data (like price feeds) to the network. Crucial for secure, verifiable value queries.</p>
+                        <a href="docs.html" class="bento-link">FTSO Endpoints →</a>
+                    </div>
+                    <div class="bento-item bento-item-md glass-card scroll-fade-in" style="animation-delay: 0.5s;">
+                        <div class="bento-icon bento-icon-blue"><span class="mono-text">FDC</span></div>
+                        <h3>Flare Data Connectors</h3>
+                        <p>Extends verifiable data sourcing beyond price feeds to any on-chain or off-chain event, enabling true data attestations (e.g., event validation, NFT ownership).</p>
+                    </div>
+                    <div class="bento-item bento-item-sm glass-card scroll-fade-in" style="animation-delay: 0.7s;">
+                        <div class="bento-icon bento-icon-aqua"><span class="mono-text">⟁</span></div>
+                        <h3>Smart Accounts</h3>
+                        <p>Enables AI agents to interact with our API and proofs using enhanced security and automation features on the Flare network.</p>
+                    </div>
+                    <div class="bento-item bento-item-sm bento-cta glass-card scroll-fade-in" style="animation-delay: 0.9s;">
+                        <div class="bento-cta-text">
+                            <p class="mono-text">Wanna see a canonical proof?</p>
+                            <a href="verify.html" class="btn btn-primary">Visualize a Proof</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <footer class="glass-footer">
+        <div class="container footer-grid">
+            <div class="footer-brand">
+                <span class="mono-text footer-logo-text">TRUTH</span><span class="footer-logo-api">API</span>
+                <p class="copyright-text">
+                    &copy; 2025 Truth API for AI Agents.<br>
+                    Powered by the Flare Ecosystem.
+                </p>
+            </div>
+            <div class="footer-links">
+                <h4 class="footer-heading mono-text">Product</h4>
+                <ul>
+                    <li><a href="playground.html">Run Live Query</a></li>
+                    <li><a href="verify.html">Verify Proof</a></li>
+                    <li><a href="legal.html">Legal Proofs</a></li> <li><a href="accounting.html">Audit Trail</a></li> <li><a href="history.html">Proof History</a></li>
+                    <li><a href="dashboard.html">Agent Cockpit</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h4 class="footer-heading mono-text">Resources</h4>
+                <ul>
+                    <li><a href="docs.html">Developer Documentation</a></li>
+                    <li><a href="#">Flare Explorer</a></li>
+                    <li><a href="#">Flare Documentation</a></li>
+                </ul>
+            </div>
+            <div class="footer-social">
+                <h4 class="footer-heading mono-text">Code & Community</h4>
+                <div class="social-icons">
+                    <a href="#" aria-label="GitHub Repository" title="GitHub"><span class="social-icon">🐙 GitHub</span></a>
+                    <a href="#" aria-label="Flare Twitter" title="X/Twitter"><span class="social-icon">🚀 X/Twitter</span></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom-bar">
+            <div class="container mono-text">
+                <span>Proof of Truth &bull; Cryptographically Secured &bull; Decentralized by Design</span>
+            </div>
+        </div>
+    </footer>
+    <script src="https://unpkg.com/ethers@5.7.2/dist/ethers.umd.min.js" type="application/javascript"></script>
+    <script src="js/app.js"></script>
+    <script src="js/ui.js"></script>
+    <script src="js/theme.js"></script>
+    <script src="js/animation.js"></script>
+    <script src="js/modal.js"></script> <div id="global-modal-overlay" class="modal-overlay">
+        </div>
+    
+</body>
+</html>

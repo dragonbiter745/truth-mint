@@ -1,0 +1,60 @@
+/* frontend/styles/_vars.css */
+
+:root {
+    /* =======================================================
+       1. COLOR PALETTE: Flare, AI, and Cyber Vibes
+       ======================================================= */
+    --color-black: #05050A; /* True deep background */
+    --color-dark-gradient-start: #0A0A15;
+    --color-dark-gradient-end: #030308;
+    
+    /* Core Neon Colors */
+    --color-neon-blue: #00F0FF; /* Cyber Cyan */
+    --color-electric-purple: #B250FF;
+    --color-aqua: #4AFEBE;
+
+    /* Semantic Colors */
+    --color-success: var(--color-aqua);     /* Verification Success */
+    --color-warning: #FFDD55;               /* Degraded Data/Notice */
+    --color-error: #FF5555;                 /* Invalid Signature/Error */
+    --color-text-primary: #FFFFFF;
+    --color-text-secondary: #AAAAAA;
+
+    /* Glassmorphism Base Color (slightly translucent dark blue) */
+    --color-glass-base: rgba(10, 10, 25, 0.6);
+    --color-glass-border: rgba(255, 255, 255, 0.1);
+
+    /* =======================================================
+       2. DESIGN PARAMETERS: Glass, Neon, Blur
+       ======================================================= */
+    --glass-blur: 12px;
+    --glass-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+
+    /* Neon Glows - Used for Text and Borders */
+    --glow-blue-light: 0 0 5px var(--color-neon-blue), 0 0 10px var(--color-neon-blue);
+    --glow-purple-medium: 0 0 8px var(--color-electric-purple), 0 0 15px var(--color-electric-purple);
+    --glow-success: 0 0 4px var(--color-success), 0 0 8px var(--color-success);
+    
+    /* =======================================================
+       3. TYPOGRAPHY & SPACING
+       ======================================================= */
+    --font-family-sans: 'Inter', sans-serif; /* Clean, modern body text */
+    --font-family-mono: 'Space Mono', monospace; /* Monospaced for code/data/terminal */
+    
+    --space-xs: 4px;
+    --space-sm: 8px;
+    --space-md: 16px;
+    --space-lg: 32px;
+    --space-xl: 64px;
+
+    /* Border Radius for smooth edges */
+    --radius-sm: 8px;
+    --radius-lg: 16px;
+
+    /* Animation speeds */
+    --transition-speed-fast: 0.2s;
+    --transition-speed-smooth: 0.5s;
+}
+
+/* Fallback/Import for necessary futuristic fonts (Assuming you'll link these in index.html) */
+/* @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Space+Mono:wght@400;700&display=swap'); */

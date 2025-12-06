@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TRUTH API | Accounting Proofs & Audit Trail</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="styles/_vars.css">
+    <link rel="stylesheet" href="styles/base.css">
+    <link rel="stylesheet" href="styles/components.css">
+    <link rel="stylesheet" href="styles/layout.css">
+    <link rel="stylesheet" href="styles/animations.css">
+
+</head>
+<body>
+    
+    <nav id="main-navbar" class="glass-nav floating-nav">
+        <div class="nav-container container">
+            <div class="nav-brand">
+                <a href="index.html">
+                    <span class="mono-text nav-logo-text">TRUTH</span><span class="nav-logo-api">API</span>
+                </a>
+            </div>
+            <ul class="nav-links">
+                <li><a href="playground.html" class="nav-link">Run Live Query</a></li>
+                <li><a href="verify.html" class="nav-link">Verify Proof</a></li>
+                <li><a href="legal.html" class="nav-link">Legal Proofs</a></li>
+                <li><a href="accounting.html" class="nav-link nav-link-cta">Audit Trail</a></li>
+                <li><a href="history.html" class="nav-link">History</a></li>
+                <li><a href="docs.html" class="nav-link">Docs</a></li>
+                <li><a href="dashboard.html" class="nav-link">Agent Cockpit</a></li>
+            </ul>
+            <div class="nav-controls">
+                <button id="wallet-connect-btn" class="btn btn-secondary btn-small mono-text">
+                    <span id="wallet-status-text">🔌 Connect Wallet</span>
+                </button>
+                <button id="theme-switcher" class="theme-toggle-btn" aria-label="Toggle Dark/Light Mode">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 3C11.6667 3 11.3333 3 11 3C16.5 3 21 7.5 21 13C21 13.3333 21 13.6667 21 14C19.5 15.5 17.5 16.5 15.5 16.5C11.5 16.5 8.5 13.5 8.5 9.5C8.5 7.5 9.5 5.5 11 4C11.3333 4 11.6667 4 12 4C12 4 12 3 12 3Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <main class="accounting-layout container">
+        <h1 class="page-title mono-text">Auditable Financial Trails</h1>
+        <p class="section-subtitle">Visualize cryptographically verified financial metrics and balances attested by the FDC.</p>
+
+        <section class="metric-grid scroll-fade-in">
+            <div class="glass-card metric-card">
+                <span class="metric-icon">💰</span>
+                <h3 class="metric-value mono-text">$12,345.67</h3>
+                <p class="metric-label">Verified FAsset Balance</p>
+            </div>
+            
+            <div class="glass-card metric-card">
+                <span class="metric-icon">🔍</span>
+                <h3 class="metric-value mono-text">720</h3>
+                <p class="metric-label">Proofs Minted This Period</p>
+            </div>
+
+            <div class="glass-card metric-card">
+                <span class="metric-icon">⏱️</span>
+                <h3 class="metric-value mono-text">1 Day</h3>
+                <p class="metric-label">Time Since Last Audit Proof</p>
+            </div>
+        </section>
+
+        <section id="audit-visualization-panel" class="glass-card scroll-fade-in">
+            <h2 class="section-heading">Verified Balance History (fBTC)</h2>
+            <div class="control-bar">
+                <label for="asset-select" class="mono-text filter-label">Asset:</label>
+                <select id="asset-select" class="glass-input filter-select">
+                    <option>fBTC</option>
+                    <option>fETH</option>
+                    <option>USDC Balance</option>
+                </select>
+                <button class="btn btn-secondary btn-small">Download Audit Report (CSV)</button>
+            </div>
+            
+            <div class="chart-container">
+                <canvas id="audit-trail-chart"></canvas>
+                <div class="chart-placeholder">
+                    <p class="mono-text">✨ Simulated Chart: Verified Balance Time-Series [Chart.js/Canvas]</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="audit-log-panel" class="glass-card scroll-fade-in">
+            <h2 class="section-heading">Recent Verified Audit Events</h2>
+            <div class="log-output mono-text" id="audit-log-output">
+                <p class="status-success">[14:00:00] Event: 'Daily Balance Sheet Hash' verified by FDC.</p>
+                <p class="status-success">[13:58:30] Event: 'Q4 Revenue Statement' hash anchored on-chain.</p>
+                <p class="status-warning">[13:55:10] Warning: External data source latency spike detected.</p>
+                <p class="status-success">[13:50:00] Event: 'Weekly Inventory Audit' hash anchored.</p>
+            </div>
+        </section>
+
+    </main>
+    
+    <div id="toast-container"></div>
+    
+    <footer class="glass-footer">
+        </footer>
+    <div id="global-modal-overlay" class="modal-overlay">
+        </div>
+    <script src="https://unpkg.com/ethers@5.7.2/dist/ethers.umd.min.js" type="application/javascript"></script>
+    <script src="js/app.js"></script>
+    <script src="js/ui.js"></script>
+    <script src="js/theme.js"></script>
+    <script src="js/modal.js"></script>
+    <script src="js/accounting.js"></script>
+    
+</body>
+</html>

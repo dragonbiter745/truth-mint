@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TRUTH API | Mint Proof as NFT</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Space+Mono:wght[400;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="styles/_vars.css">
+    <link rel="stylesheet" href="styles/base.css">
+    <link rel="stylesheet" href="styles/components.css">
+    <link rel="stylesheet" href="styles/layout.css">
+    <link rel="stylesheet" href="styles/animations.css">
+
+</head>
+<body>
+    
+    <nav id="main-navbar" class="glass-nav floating-nav">
+    <div class="nav-container container">
+        <div class="nav-brand">
+            <a href="index.html">
+                <span class="mono-text nav-logo-text">TRUTH</span><span class="nav-logo-api">API</span>
+            </a>
+        </div>
+
+        <ul class="nav-links">
+            <li><a href="playground.html" class="nav-link nav-link-cta">Run Live Query</a></li>
+            <li><a href="verify.html" class="nav-link">Verify Proof</a></li>
+            <li><a href="legal.html" class="nav-link">Legal Proofs</a></li> 
+            <li><a href="accounting.html" class="nav-link">Audit Trail</a></li>
+            <li><a href="history.html" class="nav-link">History</a></li>
+            <li><a href="docs.html" class="nav-link">Docs</a></li>
+            <li><a href="dashboard.html" class="nav-link">Agent Cockpit</a></li>
+        </ul>
+        
+        <div class="nav-controls">
+            <button id="wallet-connect-btn" class="btn btn-secondary btn-small mono-text">
+                <span id="wallet-status-text">🔌 Connect Wallet</span>
+            </button>
+            
+            <button id="theme-switcher" class="theme-toggle-btn" aria-label="Toggle Dark/Light Mode">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 3C11.6667 3 11.3333 3 11 3C16.5 3 21 7.5 21 13C21 13.3333 21 13.6667 21 14C19.5 15.5 17.5 16.5 15.5 16.5C11.5 16.5 8.5 13.5 8.5 9.5C8.5 7.5 9.5 5.5 11 4C11.3333 4 11.6667 4 12 4C12 4 12 3 12 3Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </button>
+        </div>
+    </div>
+</nav>
+    <main class="mint-layout container">
+        <h1 class="page-title mono-text text-center">Mint Truth Certificate NFT</h1>
+        <p class="section-subtitle text-center">
+            Permanently record this cryptographic proof as a verifiable NFT on the Flare blockchain.
+        </p>
+
+        <div class="mint-grid">
+            
+            <div class="nft-preview-panel scroll-fade-in" style="animation-delay: 0.2s;">
+                <h2 class="section-heading">NFT Preview: #TRUTHMINT-0012</h2>
+                <div class="nft-card-visual">
+                    <div class="nft-content-area">
+                        <p class="nft-asset mono-text">BTC/USD Price Feed</p>
+                        <p class="nft-value mono-text">$68,450.21</p>
+                        <p class="nft-proof-id mono-text">0x12c4...e901</p>
+                        <p class="nft-verified-stamp">VERIFIED ON FLARE</p>
+                    </div>
+                </div>
+                <div class="nft-metadata glass-card">
+                    <p><strong>Token Type:</strong> ERC-721</p>
+                    <p><strong>Metadata:</strong> IPFS Hash (Proof JSON)</p>
+                    <p><strong>Proof Source:</strong> FTSO & FDC</p>
+                </div>
+            </div>
+
+            <div class="mint-controls-panel glass-card scroll-fade-in" style="animation-delay: 0.4s;">
+                <h2 class="section-heading">Minting Controls</h2>
+                
+                <div class="control-group">
+                    <label for="wallet-address" class="form-label mono-text">Recipient Wallet Address</label>
+                    <input type="text" id="wallet-address" value="0xUserWallet...e4b5" class="glass-input" readonly>
+                    <p class="small-text">Minted to your currently connected Flare Smart Account.</p>
+                </div>
+
+                <div class="control-group">
+                    <label class="form-label mono-text">Mint Fee (SGB/FLR)</label>
+                    <p class="fee-amount mono-text">0.5 FLR <span class="fee-usd">(&asymp; $0.15)</span></p>
+                    <p class="small-text">Covers gas and metadata storage costs.</p>
+                </div>
+
+                <button id="mint-button" class="btn btn-primary btn-neon-glow btn-large">
+                    MINT TRUTH CERTIFICATE NFT
+                </button>
+
+                <div id="mint-status-log" class="terminal-log-output">
+                    <p class="log-ready">NFT Minter Core // Awaiting mint command...</p>
+                </div>
+            </div>
+
+        </div>
+    </main>
+    
+    <div id="mint-success-modal" style="display: none;">
+        </div>
+    
+    <div id="toast-container"></div>
+    
+    <footer class="glass-footer">
+        </footer>
+    <div id="global-modal-overlay" class="modal-overlay">
+        </div>
+    <script src="https://unpkg.com/ethers@5.7.2/dist/ethers.umd.min.js" type="application/javascript"></script>    
+    <script src="js/app.js"></script>
+    <script src="js/ui.js"></script>
+    <script src="js/theme.js"></script>
+    <script src="js/modal.js"></script>
+    <script src="js/mint.js"></script>
+    
+</body>
+</html>

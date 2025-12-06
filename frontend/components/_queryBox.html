@@ -1,0 +1,25 @@
+<form id="live-query-form">
+    
+    <label for="query-type" class="form-label mono-text">Data Attestation Type:</label>
+    <div class="input-group">
+        <select id="query-type" name="queryType" class="glass-input">
+            <option value="price_ftso">Get Verified Price (FTSO)</option>
+            <option value="validate_event">Validate Event Occurrence (FDC)</option>
+            <option value="get_fasset_state">Get FAsset State</option>
+            <option value="custom_oracle_proof">Custom Oracle Proof (Tx Hash)</option>
+        </select>
+        <span class="input-icon">⚙️</span>
+    </div>
+
+    <label for="query-input" class="form-label mono-text">Query or Hash Input:</label>
+    <div class="input-group input-group-glow">
+        <input type="text" id="query-input" placeholder="e.g. BTC/USD or 0xTxHash..." class="glass-input">
+        <span class="input-icon">⚡</span>
+    </div>
+
+    <button type="submit" id="run-query-btn" class="btn btn-primary btn-neon-glow" disabled>
+        Run Live Verification (3 sec)
+    </button>
+    
+    <div id="query-status" class="status-message">Ready.</div>
+</form>

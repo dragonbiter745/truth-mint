@@ -1,0 +1,1130 @@
+/* frontend/styles/components.css */
+
+/* =======================================================
+   1. FLOATING GLASS NAVBAR
+   ======================================================= */
+
+.glass-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000; /* Must be high to float over content */
+    padding: var(--space-sm) 0;
+    
+    /* GLASSMORPHISM CORE */
+    background: var(--color-glass-base); 
+    backdrop-filter: blur(var(--glass-blur));
+    border-bottom: 1px solid var(--color-glass-border);
+    
+    /* Subtle Neon Outer Glow */
+    box-shadow: 0 0 20px rgba(0, 240, 255, 0.15); 
+    
+    transition: transform var(--transition-speed-smooth) ease-out, background var(--transition-speed-smooth);
+}
+
+/* Optional: Shrink/change navbar appearance on scroll (JS integration later) */
+.glass-nav.scrolled {
+    padding: var(--space-xs) 0;
+    background: rgba(10, 10, 25, 0.8); /* Slightly less opaque when scrolled */
+}
+
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Branding/Logo */
+.nav-brand a {
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    /* Remove default link hover effects here */
+    text-decoration: none; 
+}
+
+.nav-logo-text {
+    color: var(--color-text-primary);
+    text-shadow: var(--glow-purple-medium);
+}
+
+.nav-logo-api {
+    color: var(--color-neon-blue);
+}
+
+/* Navigation Links */
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: var(--space-lg);
+}
+
+.nav-link {
+    color: var(--color-text-secondary);
+    font-weight: 600;
+    position: relative;
+    padding: var(--space-sm) 0;
+    transition: color var(--transition-speed-fast);
+}
+
+.nav-link:hover {
+    color: var(--color-neon-blue);
+    text-shadow: var(--glow-blue-light);
+}
+
+/* Underline active/hover effect (WOW detail) */
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--color-aqua);
+    box-shadow: var(--glow-success);
+    transition: width var(--transition-speed-fast) ease-out;
+}
+
+.nav-link:hover::after {
+    width: 100%;
+}
+
+.nav-link-cta {
+    /* Special button link for 'Run Live Query' */
+    color: var(--color-black);
+    background: var(--color-aqua);
+    padding: 8px 18px;
+    border-radius: var(--radius-sm);
+    box-shadow: var(--glow-success);
+    transition: opacity var(--transition-speed-fast), transform var(--transition-speed-fast);
+}
+
+.nav-link-cta:hover {
+    color: var(--color-black); /* Maintain dark text on bright background */
+    opacity: 0.9;
+    transform: translateY(-2px);
+    text-shadow: none; /* Turn off text shadow for contrast */
+}
+
+.nav-link-cta::after {
+    content: none; /* Remove underline from the CTA button */
+}
+
+/* Theme Switcher Button */
+.theme-toggle-btn {
+    background: none;
+    border: 1px solid var(--color-glass-border);
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    color: var(--color-text-secondary);
+    transition: all var(--transition-speed-fast);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    /* Subtle glass effect on the button itself */
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.theme-toggle-btn:hover {
+    color: var(--color-aqua);
+    border-color: var(--color-aqua);
+    box-shadow: var(--glow-blue-light);
+    transform: rotate(10deg);
+}
+
+.theme-toggle-btn svg {
+    width: 20px;
+    height: 20px;
+}
+
+/* --- WALLET CONNECTOR AND NAV CONTROLS (NEW ADDITION) --- */
+
+/* Adjusting Nav Controls for the new button */
+.nav-controls {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md); /* Spacing between wallet button and theme toggle */
+}
+
+#wallet-connect-btn {
+    /* Base style inherits from btn-secondary, but we style it specifically */
+    padding: 8px 15px;
+    font-size: 0.85rem;
+    transition: all var(--transition-speed-fast);
+}
+
+#wallet-connect-btn:hover {
+    box-shadow: var(--glow-purple-medium);
+    border-color: var(--color-electric-purple);
+    color: var(--color-electric-purple);
+}
+
+/* Connected state visual feedback */
+#wallet-connect-btn.connected {
+    color: var(--color-aqua);
+    border-color: var(--color-aqua);
+    background: rgba(74, 254, 190, 0.1);
+    box-shadow: var(--glow-success);
+}
+
+
+/* 2. Mobile Responsiveness Placeholder (Crucial for polish) */
+/* We will address the full mobile menu in a later step with JS/CSS */
+@media (max-width: 900px) {
+    .nav-links {
+        display: none; /* Hide main links on small screens for now */
+    }
+    .nav-container {
+        justify-content: space-between;
+    }
+}
+
+
+/* =======================================================
+   3. GENERIC GLASS CARD (Reused everywhere)
+   ======================================================= */
+.glass-card {
+    background: var(--color-glass-base);
+    backdrop-filter: blur(var(--glass-blur));
+    border: 1px solid var(--color-glass-border);
+    border-radius: var(--radius-lg);
+    padding: var(--space-lg);
+    box-shadow: var(--glass-shadow);
+    transition: transform 0.3s ease-out, box-shadow 0.3s ease-out;
+}
+
+.glass-card:hover {
+    /* Subtle interaction for a premium feel */
+    transform: translateY(-5px);
+    box-shadow: 0 10px 40px rgba(0, 240, 255, 0.2); 
+}
+
+/* =======================================================
+   4. HOW IT WORKS / STEP INFOGRAPHIC
+   ======================================================= */
+.text-center {
+    text-align: center;
+}
+
+.section-subtitle {
+    font-size: 1.1rem;
+    color: var(--color-text-secondary);
+    margin-bottom: var(--space-xl);
+}
+
+.step-process-grid {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--space-md);
+    margin-top: var(--space-xl);
+}
+
+.step-card {
+    flex-basis: 30%; /* Give steps equal width */
+    padding: var(--space-xl) var(--space-lg);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.step-card h3 {
+    color: var(--color-text-primary);
+    font-size: 1.4rem;
+    margin-top: var(--space-md);
+    margin-bottom: var(--space-md);
+}
+
+.step-icon {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    margin: 0 auto var(--space-md);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5rem;
+    font-weight: 700;
+    
+    /* Neon ring effect */
+    border: 3px solid transparent; 
+    transition: all 0.5s;
+}
+
+/* Specific Step Styling (Color Coding) */
+.step-icon-1 { 
+    background: rgba(0, 240, 255, 0.1); 
+    border-color: var(--color-neon-blue);
+    box-shadow: var(--glow-blue-light);
+    color: var(--color-neon-blue);
+}
+.step-icon-2 { 
+    background: rgba(178, 80, 255, 0.1); 
+    border-color: var(--color-electric-purple);
+    box-shadow: var(--glow-purple-medium);
+    color: var(--color-electric-purple);
+}
+.step-icon-3 { 
+    background: rgba(74, 254, 190, 0.1); 
+    border-color: var(--color-aqua);
+    box-shadow: var(--glow-success);
+    color: var(--color-aqua);
+}
+
+.step-arrow {
+    flex-basis: 5%;
+    display: flex;
+    justify-content: center;
+    /* Arrow should fade in with the scroll-fade-in animation */
+}
+
+/* Mobile Adjustment */
+@media (max-width: 1200px) {
+    .step-process-grid {
+        flex-direction: column;
+        gap: var(--space-lg);
+    }
+    .step-card {
+        flex-basis: 100%;
+        width: 100%;
+    }
+    .step-arrow {
+        transform: rotate(90deg); /* Rotate arrow for vertical flow */
+        height: 40px;
+        width: 40px;
+        margin: var(--space-md) 0;
+    }
+}
+/* frontend/styles/components.css - APPEND TO END */
+
+/* =======================================================
+   5. REAL-TIME DATA STREAM TICKER
+   ======================================================= */
+
+.section-full-width {
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+    padding: var(--space-xl) 0;
+    overflow: hidden; /* Crucial for hiding the edges of the scrolling strip */
+}
+
+.ticker-title {
+    margin-bottom: var(--space-sm);
+    font-size: 2rem;
+}
+
+.data-ticker-strip {
+    display: flex;
+    width: 200%; /* Enough width to hold duplicated content for seamless loop */
+    overflow: hidden;
+    /* Neon border top/bottom for high-tech look */
+    border-top: 2px solid rgba(0, 240, 255, 0.2); 
+    border-bottom: 2px solid rgba(178, 80, 255, 0.2);
+    padding: var(--space-md) 0;
+    
+    /* Apply animation */
+    animation: scroll-ticker 40s linear infinite;
+    animation-delay: 2s; /* Start after the section fades in */
+}
+
+.data-ticker-strip:hover {
+    animation-play-state: paused; /* Pause on hover - great UX detail */
+}
+
+/* Keyframe for perpetual horizontal scrolling */
+@keyframes scroll-ticker {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); } /* Scrolls the entire strip's width */
+}
+
+.data-ticker-content {
+    display: flex;
+    gap: var(--space-lg);
+    width: 50%; /* Each content block takes half the strip's width */
+    flex-shrink: 0; /* Prevents content from shrinking */
+}
+
+.data-stream-card {
+    /* Overriding glass-card to be flat for the ticker */
+    padding: var(--space-sm) var(--space-md);
+    border-radius: var(--radius-sm);
+    min-width: 280px; /* Consistent card width */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background: rgba(10, 10, 25, 0.8); /* Slightly less blurred/more opaque */
+    box-shadow: none;
+    border: 1px solid var(--color-glass-border);
+    cursor: default;
+    transition: none; /* No hover lift */
+}
+
+.data-stream-card:hover {
+    transform: none;
+    box-shadow: var(--glow-blue-light);
+}
+
+.stream-label {
+    font-size: 0.8rem;
+    color: var(--color-text-secondary);
+    margin-bottom: 2px;
+}
+
+.stream-value {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--color-aqua);
+    letter-spacing: 0.5px;
+}
+
+.stream-proof-status {
+    font-size: 0.7rem;
+    margin-top: 5px;
+    font-family: var(--font-family-mono);
+}
+
+.verified-success {
+    color: var(--color-success);
+    text-shadow: 0 0 3px rgba(74, 254, 190, 0.5);
+}
+
+.verified-warning {
+    color: var(--color-warning);
+    text-shadow: 0 0 3px rgba(255, 221, 85, 0.5);
+}
+/* frontend/styles/components.css - APPEND TO END */
+
+/* =======================================================
+   6. TECH STACK BENTO GRID
+   ======================================================= */
+
+.tech-bento-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: auto;
+    gap: var(--space-md);
+    margin-top: var(--space-xl);
+}
+
+.bento-item {
+    min-height: 200px;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Item Sizing for the Grid */
+.bento-item-lg {
+    grid-column: span 2; /* FTSO takes up 2/3 of the row */
+}
+.bento-item-md {
+    grid-column: span 1;
+}
+.bento-item-sm {
+    grid-column: span 1;
+}
+
+/* Specific component visual styling */
+.bento-icon {
+    width: 60px;
+    height: 60px;
+    border-radius: var(--radius-sm);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: var(--space-md);
+}
+
+.bento-icon-purple {
+    background: rgba(178, 80, 255, 0.2);
+    border: 1px solid var(--color-electric-purple);
+    box-shadow: var(--glow-purple-medium);
+    color: var(--color-electric-purple);
+}
+
+.bento-icon-blue {
+    background: rgba(0, 240, 255, 0.2);
+    border: 1px solid var(--color-neon-blue);
+    box-shadow: var(--glow-blue-light);
+    color: var(--color-neon-blue);
+}
+
+.bento-icon-aqua {
+    background: rgba(74, 254, 190, 0.2);
+    border: 1px solid var(--color-aqua);
+    box-shadow: var(--glow-success);
+    color: var(--color-aqua);
+}
+
+.bento-link {
+    display: block;
+    margin-top: var(--space-md);
+    font-weight: 600;
+}
+
+/* CTA Box Styling */
+.bento-cta {
+    background: linear-gradient(135deg, rgba(178, 80, 255, 0.6), rgba(0, 240, 255, 0.6)); /* Striking gradient glass */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    box-shadow: 0 0 30px rgba(178, 80, 255, 0.5); /* Stronger glow */
+}
+
+.bento-cta-text {
+    color: var(--color-text-primary);
+}
+
+.bento-cta .btn-primary {
+    margin-top: var(--space-md);
+}
+
+/* Mobile Responsiveness for Bento Grid */
+@media (max-width: 1000px) {
+    .tech-bento-grid {
+        grid-template-columns: 1fr; /* Stack all items */
+    }
+    .bento-item-lg {
+        grid-column: span 1; /* Reset to single column */
+    }
+}
+
+/* frontend/styles/components.css - APPEND TO END */
+
+/* =======================================================
+   7. QUERY BOX AND INPUT STYLES
+   ======================================================= */
+.form-label {
+    display: block;
+    margin-bottom: var(--space-sm);
+    margin-top: var(--space-md);
+    color: var(--color-neon-blue);
+    font-size: 0.9rem;
+}
+
+.input-group {
+    position: relative;
+    margin-bottom: var(--space-lg);
+}
+
+.glass-input {
+    width: 100%;
+    padding: 12px 15px;
+    padding-right: 40px; /* Space for the icon */
+    border: 1px solid var(--color-glass-border);
+    border-radius: var(--radius-sm);
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--color-text-primary);
+    font-family: var(--font-family-mono);
+    font-size: 1rem;
+    transition: all var(--transition-speed-fast);
+    
+    /* Subtle inner shadow for depth */
+    box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.5);
+    
+    /* Remove default focus outline */
+    outline: none; 
+}
+
+/* Neon glow on focus (WOW factor for inputs) */
+.glass-input:focus {
+    border-color: var(--color-neon-blue);
+    box-shadow: var(--glow-blue-light), 0 0 15px rgba(0, 240, 255, 0.3);
+}
+
+.input-group-glow {
+    /* Stronger initial glow for the main input */
+    box-shadow: 0 0 5px rgba(178, 80, 255, 0.5);
+}
+
+.input-icon {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    color: var(--color-electric-purple);
+    pointer-events: none;
+    font-size: 1.1rem;
+}
+
+.status-message {
+    margin-top: var(--space-md);
+    font-family: var(--font-family-mono);
+    font-size: 0.85rem;
+    color: var(--color-text-secondary);
+}
+/* frontend/styles/components.css - APPEND TO END */
+
+/* =======================================================
+   8. VERIFICATION ARCHITECTURE VISUAL
+   ======================================================= */
+
+.architecture-flow {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-md);
+    padding: var(--space-lg) 0;
+}
+
+.flow-node {
+    width: 90%;
+    padding: 12px 20px;
+    border-radius: var(--radius-sm);
+    text-align: center;
+    font-weight: 700;
+    transition: all var(--transition-speed-smooth);
+    opacity: 0.5; /* Dimmed state before activation */
+    border: 1px solid var(--color-glass-border);
+    background: rgba(255, 255, 255, 0.05);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Base Color Coding */
+.flow-node-start {
+    color: var(--color-text-primary);
+    background: rgba(178, 80, 255, 0.2);
+}
+.flow-node-mid {
+    color: var(--color-text-secondary);
+}
+.flow-node-end {
+    color: var(--color-text-primary);
+    background: rgba(74, 254, 190, 0.2);
+}
+
+/* Connector Line Style */
+.flow-connector {
+    width: 2px;
+    height: 25px;
+    background: var(--color-text-secondary);
+    opacity: 0.3;
+    transition: background 0.3s, box-shadow 0.3s, height 0.3s;
+}
+
+/* Activated States (Used by JS) */
+.flow-node.active {
+    opacity: 1;
+    color: var(--color-text-primary);
+    background: rgba(0, 240, 255, 0.3);
+    border-color: var(--color-neon-blue);
+    box-shadow: var(--glow-blue-light);
+    animation: node-pulse 0.5s infinite alternate;
+}
+
+.flow-connector.active {
+    background: var(--color-electric-purple);
+    opacity: 1;
+    box-shadow: 0 0 10px var(--color-electric-purple);
+}
+
+/* Terminal Log Output */
+.terminal-log-output {
+    margin-top: var(--space-lg);
+    background: var(--color-black);
+    border: 1px solid var(--color-glass-border);
+    padding: var(--space-md);
+    font-family: var(--font-family-mono);
+    font-size: 0.8rem;
+    height: 120px;
+    overflow-y: scroll;
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.8);
+    color: var(--color-success); /* Default green terminal text */
+}
+
+.log-line {
+    display: block;
+    line-height: 1.4;
+    white-space: pre-wrap;
+    /* Optional: Typing animation via JS for extra polish */
+}
+.log-ready { color: var(--color-text-secondary); }
+.log-error { color: var(--color-error); }
+.log-warning { color: var(--color-warning); }
+/* frontend/styles/components.css - APPEND TO END */
+
+/* =======================================================
+   9. PROOF CARD COMPONENT
+   ======================================================= */
+
+.proof-card-container {
+    padding: var(--space-lg);
+    transition: all 0.5s ease-out;
+}
+
+.proof-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--color-glass-border);
+    padding-bottom: var(--space-md);
+    margin-bottom: var(--space-md);
+}
+
+.proof-title {
+    font-size: 1.2rem;
+    color: var(--color-electric-purple);
+}
+
+/* Status Indicator (Green/Red/Yellow) */
+.proof-status-indicator {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.85rem;
+    font-weight: 700;
+}
+
+.status-icon {
+    width: 20px;
+    height: 20px;
+}
+
+/* Base Success State (Default) */
+.verified-status-success .proof-status-text {
+    color: var(--color-success);
+    text-shadow: var(--glow-success);
+}
+.verified-status-success .status-icon {
+    color: var(--color-success);
+}
+
+/* Error State Overrides (Use JS to swap class) */
+.verified-status-error .proof-status-text {
+    color: var(--color-error);
+    text-shadow: 0 0 5px var(--color-error);
+}
+.verified-status-error .status-icon {
+    color: var(--color-error);
+    /* Change icon path via JS/SVG when error */
+}
+
+.proof-data-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-md);
+    margin-bottom: var(--space-lg);
+}
+
+.proof-item {
+    padding: var(--space-sm) 0;
+}
+
+.proof-item.item-full {
+    grid-column: 1 / -1; /* Span entire row for long hashes/signatures */
+}
+
+.item-label {
+    display: block;
+    font-size: 0.8rem;
+    color: var(--color-text-secondary);
+    margin-bottom: 4px;
+    letter-spacing: 1px;
+}
+
+.item-value {
+    display: block;
+    font-size: 1.05rem;
+    font-weight: 400;
+}
+
+.item-break {
+    word-break: break-all; /* Ensure long hashes don't overflow */
+}
+
+/* Color Highlighting for key values */
+.item-highlight-aqua {
+    color: var(--color-aqua);
+}
+.item-highlight-purple a, .item-highlight-purple {
+    color: var(--color-electric-purple);
+    text-shadow: 0 0 3px rgba(178, 80, 255, 0.5);
+}
+
+.tx-link:hover {
+    text-decoration: underline;
+    text-shadow: var(--glow-blue-light);
+}
+
+/* Actions */
+.proof-actions {
+    border-top: 1px solid var(--color-glass-border);
+    padding-top: var(--space-md);
+    display: flex;
+    gap: var(--space-sm);
+}
+
+.btn-small {
+    padding: 8px 15px;
+    font-size: 0.8rem;
+}
+/* frontend/styles/components.css - APPEND TO END */
+
+/* =======================================================
+   10. TOAST NOTIFICATIONS
+   ======================================================= */
+
+#toast-container {
+    position: fixed;
+    bottom: var(--space-lg);
+    right: var(--space-lg);
+    z-index: 10000;
+    display: flex;
+    flex-direction: column-reverse; /* Newest toast appears on top */
+    gap: var(--space-sm);
+}
+
+.toast {
+    /* Glassmorphism base */
+    background: rgba(10, 10, 25, 0.9); 
+    backdrop-filter: blur(8px);
+    border: 1px solid var(--color-glass-border);
+    border-radius: var(--radius-sm);
+    padding: var(--space-md) var(--space-lg);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+    min-width: 250px;
+    max-width: 350px;
+    
+    /* Animation: start off-screen */
+    transform: translateX(100%);
+    opacity: 0;
+    transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.toast.show {
+    transform: translateX(0);
+    opacity: 1;
+}
+
+/* Toast States (Color Coding) */
+.toast-success {
+    border-left: 4px solid var(--color-success);
+    color: var(--color-success);
+    box-shadow: 0 0 15px rgba(74, 254, 190, 0.3);
+}
+
+.toast-error {
+    border-left: 4px solid var(--color-error);
+    color: var(--color-error);
+    box-shadow: 0 0 15px rgba(255, 85, 85, 0.3);
+}
+
+.toast-warning {
+    border-left: 4px solid var(--color-warning);
+    color: var(--color-warning);
+    box-shadow: 0 0 15px rgba(255, 221, 85, 0.3);
+}
+
+.toast-info {
+    border-left: 4px solid var(--color-neon-blue);
+    color: var(--color-neon-blue);
+    box-shadow: 0 0 15px rgba(0, 240, 255, 0.3);
+}
+/* frontend/styles/components.css - APPEND TO END */
+
+/* =======================================================
+   11. FOOTER COMPONENT
+   ======================================================= */
+
+.glass-footer {
+    /* Glassmorphism base for the footer */
+    background: rgba(10, 10, 25, 0.7); 
+    backdrop-filter: blur(5px);
+    border-top: 1px solid var(--color-glass-border);
+    padding-top: var(--space-xl);
+    color: var(--color-text-secondary);
+    font-size: 0.95rem;
+}
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1.5fr;
+    gap: var(--space-lg);
+    margin-bottom: var(--space-lg);
+}
+
+.footer-logo-text {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--color-text-primary);
+    text-shadow: var(--glow-purple-medium);
+}
+.footer-logo-api {
+    font-size: 1.5rem;
+    color: var(--color-neon-blue);
+}
+
+.copyright-text {
+    margin-top: var(--space-sm);
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.4);
+}
+
+.footer-heading {
+    color: var(--color-neon-blue);
+    font-size: 1.1rem;
+    margin-bottom: var(--space-md);
+}
+
+.footer-links ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-links a {
+    display: block;
+    padding: 4px 0;
+    color: var(--color-text-secondary);
+    transition: color var(--transition-speed-fast);
+}
+
+.footer-links a:hover {
+    color: var(--color-aqua);
+    text-shadow: none;
+}
+
+.social-icons a {
+    display: inline-block;
+    padding: 6px 0;
+    margin-right: var(--space-md);
+    color: var(--color-text-primary);
+    font-family: var(--font-family-mono);
+}
+
+.social-icon:hover {
+    color: var(--color-electric-purple);
+    text-shadow: var(--glow-purple-medium);
+}
+
+.footer-bottom-bar {
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    padding: var(--space-md) 0;
+    text-align: center;
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.3);
+}
+
+/* Mobile Adjustment for Footer */
+@media (max-width: 800px) {
+    .footer-grid {
+        grid-template-columns: 1fr 1fr; /* Two columns wide */
+        gap: var(--space-lg);
+    }
+    .footer-brand {
+        grid-column: 1 / -1; /* Brand spans full width */
+        text-align: center;
+    }
+    .footer-brand p {
+        margin: 0 auto;
+    }
+    .footer-social {
+        grid-column: 1 / -1;
+        text-align: center;
+        margin-top: var(--space-md);
+    }
+    .social-icons {
+        display: flex;
+        justify-content: center;
+        gap: var(--space-md);
+    }
+}
+/* frontend/styles/components.css - APPEND TO END */
+
+/* =======================================================
+   12. CODE BLOCK / STICKY DOCS STYLES
+   ======================================================= */
+
+.code-example-block {
+    margin: var(--space-lg) 0;
+    border-radius: var(--radius-sm);
+    overflow: hidden;
+    background: var(--color-black); /* True black background for contrast */
+    border: 1px solid var(--color-glass-border);
+    box-shadow: 0 0 10px rgba(0, 240, 255, 0.1);
+}
+
+.code-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--space-sm) var(--space-md);
+    background: rgba(255, 255, 255, 0.05);
+    border-bottom: 1px solid var(--color-glass-border);
+}
+
+.language-tag {
+    font-size: 0.8rem;
+    color: var(--color-electric-purple);
+}
+
+.code-content {
+    padding: var(--space-md);
+    overflow-x: auto; /* Ensure horizontal scroll for long code lines */
+}
+
+/* Syntax Highlighting via CSS variables (Simulated) */
+.code-content code {
+    display: block;
+    color: var(--color-text-primary);
+    font-size: 0.95rem;
+    line-height: 1.4;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+
+/* Target specific language colors for neon effect */
+.language-curl {
+    color: var(--color-aqua);
+}
+.language-json {
+    color: var(--color-neon-blue);
+}
+
+/* Copy Button Styling (Reusing btn-small) */
+.copy-btn {
+    position: relative;
+    cursor: pointer;
+    background: none;
+    border: 1px solid var(--color-glass-border);
+    color: var(--color-text-secondary);
+}
+
+.copy-btn:hover {
+    color: var(--color-aqua);
+    border-color: var(--color-aqua);
+}
+
+/* API Parameter Table (Clean, Monochromatic) */
+.param-table {
+    display: grid;
+    grid-template-columns: 150px 100px 1fr;
+    gap: var(--space-sm) var(--space-md);
+    border-left: 3px solid var(--color-electric-purple);
+    padding-left: var(--space-md);
+    margin-top: var(--space-md);
+}
+
+.param-name {
+    font-weight: 700;
+    color: var(--color-neon-blue);
+}
+
+.param-type {
+    color: var(--color-success);
+    font-style: italic;
+    font-size: 0.9rem;
+}
+
+.param-desc {
+    color: var(--color-text-secondary);
+    font-size: 0.9rem;
+}
+/* frontend/styles/components.css - APPEND TO END */
+
+/* =======================================================
+   13. GLOBAL MODAL OVERLAY
+   ======================================================= */
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.8); /* Dark, slightly transparent backdrop */
+    backdrop-filter: blur(5px);
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    /* Initially hidden */
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out, visibility 0.3s;
+}
+
+.modal-overlay.active {
+    visibility: visible;
+    opacity: 1;
+}
+
+.modal-content {
+    /* Reusing the glass-card style */
+    max-width: 800px;
+    width: 90%;
+    max-height: 90vh;
+    padding: var(--space-lg);
+    border: 1px solid var(--color-neon-blue);
+    box-shadow: 0 0 40px rgba(0, 240, 255, 0.3); /* Stronger glow for emphasis */
+    
+    /* Animation: scale down and fade in */
+    transform: scale(0.95) translateY(20px);
+    transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+    display: flex;
+    flex-direction: column;
+}
+
+.modal-overlay.active .modal-content {
+    transform: scale(1) translateY(0);
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--color-glass-border);
+    padding-bottom: var(--space-md);
+    margin-bottom: var(--space-md);
+}
+
+.modal-title {
+    font-size: 1.5rem;
+    color: var(--color-electric-purple);
+}
+
+.modal-close-btn {
+    background: none;
+    border: none;
+    color: var(--color-text-secondary);
+    cursor: pointer;
+    padding: var(--space-sm);
+    transition: color 0.2s;
+}
+
+.modal-close-btn:hover {
+    color: var(--color-error);
+    transform: rotate(90deg);
+}
+
+.modal-body {
+    overflow-y: auto; /* Scrollable content within the modal */
+    flex-grow: 1;
+    padding-right: var(--space-sm);
+}
+
+.modal-footer {
+    border-top: 1px solid var(--color-glass-border);
+    padding-top: var(--space-md);
+    text-align: right;
+}
+
+/* Specific styling for when a proof card is inside the modal */
+.modal-body .proof-card-container {
+    /* Remove padding/shadow since it's already in the modal content */
+    border: none;
+    box-shadow: none;
+    background: none; 
+    padding: 0;
+}

@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TRUTH API | Live Verification Playground</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="styles/_vars.css">
+    <link rel="stylesheet" href="styles/base.css">
+    <link rel="stylesheet" href="styles/components.css">
+    <link rel="stylesheet" href="styles/layout.css">
+    <link rel="stylesheet" href="styles/animations.css">
+
+</head>
+<body>
+    
+    <nav id="main-navbar" class="glass-nav floating-nav">
+        <div class="nav-container container">
+            <div class="nav-brand">
+                <a href="index.html">
+                    <span class="mono-text nav-logo-text">TRUTH</span><span class="nav-logo-api">API</span>
+                </a>
+            </div>
+
+            <ul class="nav-links">
+                <li><a href="playground.html" class="nav-link nav-link-cta">Run Live Query</a></li>
+                <li><a href="verify.html" class="nav-link">Verify Proof</a></li>
+                <li><a href="legal.html" class="nav-link">Legal Proofs</a></li> 
+                <li><a href="accounting.html" class="nav-link">Audit Trail</a></li>
+                <li><a href="history.html" class="nav-link">History</a></li>
+                <li><a href="docs.html" class="nav-link">Docs</a></li>
+                <li><a href="dashboard.html" class="nav-link">Agent Cockpit</a></li>
+            </ul>
+            
+            <div class="nav-controls">
+                <button id="wallet-connect-btn" class="btn btn-secondary btn-small mono-text">
+                    <span id="wallet-status-text">🔌 Connect Wallet</span>
+                </button>
+                
+                <button id="theme-switcher" class="theme-toggle-btn" aria-label="Toggle Dark/Light Mode">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 3C11.6667 3 11.3333 3 11 3C16.5 3 21 7.5 21 13C21 13.3333 21 13.6667 21 14C19.5 15.5 17.5 16.5 15.5 16.5C11.5 16.5 8.5 13.5 8.5 9.5C8.5 7.5 9.5 5.5 11 4C11.3333 4 11.6667 4 12 4C12 4 12 3 12 3Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <main class="playground-layout container">
+        <h1 class="page-title mono-text">Live Verification Console</h1>
+
+        <section id="query-interface" class="glass-card">
+            <h2 class="section-heading">Query Parameters</h2>
+            <div id="query-box">
+                <form id="live-query-form">
+    
+                    <label for="query-type" class="form-label mono-text">Data Attestation Type:</label>
+                    <div class="input-group">
+                        <select id="query-type" name="queryType" class="glass-input">
+                            <option value="price_ftso">Get Verified Price (FTSO)</option>
+                            <option value="validate_event">Validate Event Occurrence (FDC)</option>
+                            <option value="get_fasset_state">Get FAsset State</option>
+                            <option value="custom_oracle_proof">Custom Oracle Proof (Tx Hash)</option>
+                        </select>
+                        <span class="input-icon">⚙️</span>
+                    </div>
+
+                    <label for="query-input" class="form-label mono-text">Query or Hash Input:</label>
+                    <div class="input-group input-group-glow">
+                        <input type="text" id="query-input" placeholder="e.g. BTC/USD or 0xTxHash..." class="glass-input">
+                        <span class="input-icon">⚡</span>
+                    </div>
+
+                    <button type="submit" id="run-query-btn" class="btn btn-primary btn-neon-glow" disabled>
+                        Run Live Verification (3 sec)
+                    </button>
+                    
+                    <div id="query-status" class="status-message">Ready.</div>
+                </form>
+                </div>
+        </section>
+
+        <section id="verification-visual" class="glass-card">
+            <h2 class="section-heading">Verification Path</h2>
+            <div id="architecture-diagram">
+                
+                <div class="architecture-flow">
+
+                    <div id="node-request" class="flow-node flow-node-start">
+                        <span class="node-label mono-text">01. AI REQUEST</span>
+                    </div>
+
+                    <div id="conn-1" class="flow-connector"></div>
+
+                    <div id="node-ftso" class="flow-node flow-node-mid">
+                        <span class="node-label mono-text">02. FTSO CONSENSUS</span>
+                    </div>
+
+                    <div id="conn-2" class="flow-connector"></div>
+                    
+                    <div id="node-fdc" class="flow-node flow-node-mid">
+                        <span class="node-label mono-text">03. FDC ATTESTATION</span>
+                    </div>
+
+                    <div id="conn-3" class="flow-connector"></div>
+
+                    <div id="node-hub" class="flow-node flow-node-mid">
+                        <span class="node-label mono-text">04. PROOF ANCHOR</span>
+                    </div>
+                    
+                    <div id="conn-4" class="flow-connector"></div>
+
+                    <div id="node-response" class="flow-node flow-node-end">
+                        <span class="node-label mono-text">05. VERIFIED RESPONSE</span>
+                    </div>
+
+                </div>
+                <div id="verification-log" class="terminal-log-output">
+                    <span class="log-line log-ready">TRUTH CORE // Awaiting query activation...</span>
+                </div>
+                
+            </div>
+        </section>
+
+        <section id="response-panel" class="glass-card">
+            <h2 class="section-heading">Truth Response</h2>
+            <div id="proof-viewer-output">
+                </div>
+        </section>
+    </main>
+    <script src="https://unpkg.com/ethers@5.7.2/dist/ethers.umd.min.js" type="application/javascript"></script>
+    <script src="js/app.js"></script>
+    <script src="js/ui.js"></script>
+    <script src="js/theme.js"></script>
+    <script src="js/playground.js"></script> 
+<div id="global-modal-overlay" class="modal-overlay">
+        </div>
+    </body>
+</html>

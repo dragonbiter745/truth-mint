@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TRUTH API | Proof History</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="styles/_vars.css">
+    <link rel="stylesheet" href="styles/base.css">
+    <link rel="stylesheet" href="styles/components.css">
+    <link rel="stylesheet" href="styles/layout.css">
+    <link rel="stylesheet" href="styles/animations.css">
+
+</head>
+<body>
+    
+    <nav id="main-navbar" class="glass-nav floating-nav">
+    <div class="nav-container container">
+        <div class="nav-brand">
+            <a href="index.html">
+                <span class="mono-text nav-logo-text">TRUTH</span><span class="nav-logo-api">API</span>
+            </a>
+        </div>
+
+        <ul class="nav-links">
+            <li><a href="playground.html" class="nav-link nav-link-cta">Run Live Query</a></li>
+            <li><a href="verify.html" class="nav-link">Verify Proof</a></li>
+            <li><a href="legal.html" class="nav-link">Legal Proofs</a></li> 
+            <li><a href="accounting.html" class="nav-link">Audit Trail</a></li>
+            <li><a href="history.html" class="nav-link">History</a></li>
+            <li><a href="docs.html" class="nav-link">Docs</a></li>
+            <li><a href="dashboard.html" class="nav-link">Agent Cockpit</a></li>
+        </ul>
+        
+        <div class="nav-controls">
+            <button id="wallet-connect-btn" class="btn btn-secondary btn-small mono-text">
+                <span id="wallet-status-text">🔌 Connect Wallet</span>
+            </button>
+            
+            <button id="theme-switcher" class="theme-toggle-btn" aria-label="Toggle Dark/Light Mode">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 3C11.6667 3 11.3333 3 11 3C16.5 3 21 7.5 21 13C21 13.3333 21 13.6667 21 14C19.5 15.5 17.5 16.5 15.5 16.5C11.5 16.5 8.5 13.5 8.5 9.5C8.5 7.5 9.5 5.5 11 4C11.3333 4 11.6667 4 12 4C12 4 12 3 12 3Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </button>
+        </div>
+    </div>
+</nav>
+
+    <main class="history-layout container">
+        <h1 class="page-title mono-text">Verified Proof Log</h1>
+        <p class="section-subtitle">Audit and review all past cryptographic attestations.</p>
+
+        <div class="history-controls glass-card scroll-fade-in">
+            <input type="text" id="search-query" placeholder="Search by asset, hash, or agent..." class="glass-input">
+            
+            <div class="filter-group">
+                <label for="status-filter" class="mono-text filter-label">Status:</label>
+                <select id="status-filter" class="glass-input filter-select">
+                    <option value="all">All</option>
+                    <option value="success">Success</option>
+                    <option value="failed">Failed</option>
+                    <option value="pending">Pending</option>
+                </select>
+
+                <label for="type-filter" class="mono-text filter-label">Type:</label>
+                <select id="type-filter" class="glass-input filter-select">
+                    <option value="all">All Types</option>
+                    <option value="price">Price Feed (FTSO)</option>
+                    <option value="event">Event Attestation (FDC)</option>
+                </select>
+            </div>
+        </div>
+
+        <div id="history-log-container">
+            <table class="history-table">
+                <thead>
+                    <tr>
+                        <th>Query/Asset</th>
+                        <th>Value/Response</th>
+                        <th>Timestamp</th>
+                        <th>Proof Status</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody id="history-table-body">
+                    <tr class="history-item success-row">
+                        <td class="item-query">BTC/USD Price Feed</td>
+                        <td class="item-value mono-text">$68,450.21</td>
+                        <td class="item-timestamp">2025-12-06 12:45 UTC</td>
+                        <td class="item-status status-success">Success (Anchored)</td>
+                        <td><button class="btn btn-secondary btn-view-proof" data-hash="0x12c4d678f8e901f2345678b90123456789">View Proof</button></td>
+                    </tr>
+                    <tr class="history-item failed-row">
+                        <td class="item-query">ETH Event Attestation</td>
+                        <td class="item-value mono-text">N/A</td>
+                        <td class="item-timestamp">2025-12-05 08:10 UTC</td>
+                        <td class="item-status status-failed">Failed (Signature Mismatch)</td>
+                        <td><button class="btn btn-secondary btn-view-proof" data-hash="0xdeadbeef">View Log</button></td>
+                    </tr>
+                    <tr class="history-item pending-row">
+                        <td class="item-query">FAsset Redemption State</td>
+                        <td class="item-value mono-text">Pending</td>
+                        <td class="item-timestamp">2025-12-06 12:50 UTC</td>
+                        <td class="item-status status-pending">Pending</td>
+                        <td><button class="btn btn-secondary btn-view-proof" disabled>Pending...</button></td>
+                    </tr>
+                    </tbody>
+            </table>
+        </div>
+    </main>
+
+    <div id="toast-container"></div>
+    
+    <footer class="glass-footer">
+        </footer>
+    <script src="https://unpkg.com/ethers@5.7.2/dist/ethers.umd.min.js" type="application/javascript"></script>    
+    <script src="js/app.js"></script>
+    <script src="js/ui.js"></script>
+    <script src="js/theme.js"></script>
+    <script src="js/modal.js"></script>
+    <script src="js/proofViewer.js"></script> <script src="js/history.js"></script>
+   <div id="global-modal-overlay" class="modal-overlay">
+        </div> 
+</body>
+</html>

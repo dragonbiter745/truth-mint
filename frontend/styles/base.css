@@ -1,0 +1,98 @@
+/* frontend/styles/base.css */
+
+/* 1. CSS Reset & Box Sizing */
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* 2. Global Body & Dark Theme Setup */
+body {
+    /* Deep Gradient Background for premium feel */
+    background: radial-gradient(circle at top left, var(--color-dark-gradient-start) 0%, var(--color-dark-gradient-end) 100%);
+    background-color: var(--color-black); 
+    color: var(--color-text-primary);
+    font-family: var(--font-family-sans);
+    line-height: 1.6;
+    min-height: 100vh;
+    scroll-behavior: smooth;
+    overflow-x: hidden; /* Prevents horizontal scroll from animations/glows */
+}
+
+/* Subtle Animated Background (Cyberpunk Data Rain) */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* We'll use a simple background pattern or a pseudo-element animation for the effect */
+    background: repeating-linear-gradient(
+        to bottom, 
+        rgba(0, 240, 255, 0.03), 
+        rgba(178, 80, 255, 0.03) 1px, 
+        transparent 1px, 
+        transparent 100px
+    );
+    z-index: -1;
+    opacity: 0.5;
+    animation: data-flow 120s linear infinite; /* Slow, perpetual data movement */
+}
+
+@keyframes data-flow {
+    from { background-position: 0 0; }
+    to { background-position: 0 10000px; }
+}
+
+/* 3. Typography Styles */
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-family-mono);
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: var(--space-md);
+    color: var(--color-neon-blue); /* Neon Headings */
+}
+
+h1 { font-size: 3.5rem; }
+h2 { font-size: 2.5rem; border-bottom: 1px solid var(--color-glass-border); padding-bottom: var(--space-sm); }
+h3 { font-size: 1.75rem; color: var(--color-electric-purple); }
+
+p {
+    margin-bottom: var(--space-md);
+    color: var(--color-text-secondary);
+}
+
+a {
+    color: var(--color-neon-blue);
+    text-decoration: none;
+    transition: color var(--transition-speed-fast), text-shadow var(--transition-speed-fast);
+}
+
+a:hover {
+    color: var(--color-aqua);
+    text-shadow: var(--glow-blue-light);
+}
+
+/* 4. Global Utility Classes for Consistency */
+.container {
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 0 var(--space-lg);
+}
+
+.mono-text {
+    font-family: var(--font-family-mono);
+    color: var(--color-aqua);
+}
+
+.text-gradient {
+    /* Used for the main tagline - simulates a gradient on text */
+    background: linear-gradient(90deg, var(--color-neon-blue), var(--color-electric-purple));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-fill-color: transparent;
+    text-shadow: var(--glow-blue-light);
+}

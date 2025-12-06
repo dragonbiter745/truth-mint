@@ -1,0 +1,63 @@
+/* frontend/styles/animations.css */
+
+/* =======================================================
+   1. HERO DATA STREAM ANIMATION
+   ======================================================= */
+@keyframes flow-down {
+    0% {
+        transform: translateY(-100%);
+        opacity: 0;
+    }
+    10% {
+        opacity: 1;
+    }
+    90% {
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(1000%);
+        opacity: 0;
+    }
+}
+
+/* =======================================================
+   2. GLOBAL SCROLL/FADE ANIMATIONS (Placeholder for later)
+   ======================================================= */
+
+/* Fade-in up effect for scroll-trigger */
+@keyframes fade-in-up {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.scroll-fade-in {
+    opacity: 1;
+    /* Default visibility hidden, JS will add 'is-visible' class */
+}
+
+.scroll-fade-in.is-visible {
+    animation: fade-in-up 0.8s ease-out forwards;
+}
+
+/* Ensure all relevant CSS files are linked in index.html */
+/* You must add this line to index.html HEAD section now: */
+/* <link rel="stylesheet" href="styles/animations.css"> */
+/* frontend/styles/animations.css - APPEND TO END */
+
+/* =======================================================
+   3. NODE ACTIVATION ANIMATION (Flashes the node)
+   ======================================================= */
+@keyframes node-pulse {
+    0% {
+        box-shadow: 0 0 10px var(--color-neon-blue), 0 0 20px rgba(0, 240, 255, 0.3);
+    }
+    100% {
+        box-shadow: 0 0 5px var(--color-neon-blue), 0 0 10px rgba(0, 240, 255, 0.1);
+    }
+}

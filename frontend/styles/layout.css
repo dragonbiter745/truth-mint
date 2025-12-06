@@ -1,0 +1,1043 @@
+
+/* frontend/styles/layout.css */
+
+/* =======================================================
+   1. GENERIC SECTION LAYOUT
+   ======================================================= */
+.section {
+    padding: var(--space-xl) 0;
+    min-height: 50vh;
+}
+
+/* =======================================================
+   2. HERO SECTION LAYOUT (The main focus)
+   ======================================================= */
+.hero {
+    /* Push content down past the fixed navbar */
+    padding-top: 180px; 
+    padding-bottom: 120px;
+    position: relative;
+    /* Ensure the hero fills a good portion of the screen */
+    min-height: 80vh; 
+    
+    /* Subtle background grid (optional but adds to the look) */
+    background-size: 50px 50px;
+    background-image: linear-gradient(to right, rgba(255,255,255,0.02) 1px, transparent 1px),
+                      linear-gradient(to bottom, rgba(255,255,255,0.02) 1px, transparent 1px);
+}
+
+.hero-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--space-xl);
+}
+
+.hero-text-block {
+    max-width: 600px;
+}
+
+.hero-title {
+    font-size: 4.5rem;
+    margin-bottom: var(--space-md);
+    line-height: 1.1;
+}
+
+.hero-subtitle {
+    font-size: 1.25rem;
+    color: var(--color-text-secondary);
+    max-width: 550px;
+    margin-bottom: var(--space-lg);
+}
+
+.hero-cta-group {
+    display: flex;
+    gap: var(--space-md);
+    margin-bottom: var(--space-xl);
+}
+
+.hero-stats {
+    display: flex;
+    gap: var(--space-xl);
+    padding-top: var(--space-md);
+    border-top: 1px solid var(--color-glass-border);
+}
+
+.stat-item {
+    font-size: 0.9rem;
+    color: var(--color-text-secondary);
+}
+
+.stat-number {
+    display: block;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--color-aqua);
+}
+
+/* Hero Visual Placeholder */
+/* frontend/styles/layout.css - UPDATED Section 2: HERO VISUAL */
+
+.hero-visual {
+    width: 450px;
+    height: 450px;
+    position: relative;
+    
+    /* Neo-Glass-Tech Housing */
+    background: rgba(10, 10, 25, 0.4); /* Darker glass base */
+    border: 1px solid var(--color-neon-blue); 
+    border-radius: var(--radius-lg);
+    box-shadow: 0 0 15px rgba(0, 240, 255, 0.5), 0 0 30px rgba(178, 80, 255, 0.3); /* Intense Neon Glow */
+    backdrop-filter: blur(8px);
+    overflow: hidden; /* Keep particles and lines inside */
+    
+    /* 3D tilt for holographic look */
+    transform: perspective(1000px) rotateX(5deg) rotateY(-5deg);
+}
+
+#data-stream-visualization {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    /* Simulate the holographic projection layer */
+}
+
+/* Base style for the data lines/particles */
+.data-line {
+    position: absolute;
+    width: 2px;
+    height: 30px;
+    background: var(--color-aqua);
+    box-shadow: 0 0 8px var(--color-aqua);
+    opacity: 0;
+    animation: flow-down 6s linear infinite;
+}
+
+/* Terminal-style monitor frame effect */
+.hero-visual::before {
+    content: '';
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    right: 5px;
+    bottom: 5px;
+    border: 1px solid var(--color-electric-purple);
+    pointer-events: none;
+    opacity: 0.3;
+}
+
+/* =======================================================
+   3. CTA BUTTON STYLES (Add to components.css, but include here for context)
+   ======================================================= */
+.btn {
+    padding: 15px 30px;
+    border-radius: var(--radius-sm);
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all var(--transition-speed-fast);
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-sm);
+}
+
+.btn-primary {
+    background: var(--color-neon-blue);
+    color: var(--color-black);
+    border: none;
+}
+
+.btn-primary:hover {
+    opacity: 0.9;
+    transform: translateY(-2px);
+}
+
+.btn-neon-glow {
+    box-shadow: 0 0 10px var(--color-neon-blue), 0 0 20px rgba(0, 240, 255, 0.3);
+}
+
+.btn-secondary {
+    background: transparent;
+    color: var(--color-text-primary);
+    border: 1px solid var(--color-glass-border);
+    backdrop-filter: blur(5px);
+}
+
+.btn-secondary:hover {
+    border-color: var(--color-neon-blue);
+    color: var(--color-neon-blue);
+    box-shadow: var(--glow-blue-light);
+}
+
+/* Responsive adjustments */
+@media (max-width: 1000px) {
+    .hero-content {
+        flex-direction: column;
+        text-align: center;
+    }
+    .hero-text-block {
+        max-width: none;
+    }
+    .hero-title {
+        font-size: 3rem;
+    }
+    .hero-visual {
+        width: 100%;
+        max-width: 450px;
+        height: 300px;
+    }
+    .hero-cta-group {
+        justify-content: center;
+    }
+    .hero-stats {
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+}
+/* frontend/styles/layout.css - APPEND TO END */
+
+/* =======================================================
+   4. PLAYGROUND CONSOLE LAYOUT
+   ======================================================= */
+
+.playground-layout {
+    padding-top: 100px; /* Below navbar */
+    padding-bottom: var(--space-xl);
+    display: grid;
+    /* Grid structure: 1fr (Query) | 2fr (Visual) | 1.5fr (Response) */
+    grid-template-columns: 1fr 2fr 1.5fr; 
+    grid-template-rows: auto auto;
+    gap: var(--space-lg);
+    min-height: 95vh;
+}
+
+.page-title {
+    grid-column: 1 / -1; /* Spans all columns */
+    font-size: 2.5rem;
+    margin-bottom: var(--space-md);
+    padding-top: var(--space-md);
+}
+
+/* Assign sections to the grid */
+#query-interface {
+    grid-column: 1 / 2;
+    grid-row: 2 / 3;
+}
+
+#verification-visual {
+    grid-column: 2 / 3;
+    grid-row: 2 / 3;
+}
+
+#response-panel {
+    grid-column: 3 / 4;
+    grid-row: 2 / 3;
+}
+
+.section-heading {
+    font-size: 1.1rem;
+    color: var(--color-electric-purple);
+    border-bottom: 1px solid var(--color-glass-border);
+    padding-bottom: var(--space-sm);
+    margin-bottom: var(--space-md);
+}
+
+/* Full responsiveness for mobile */
+@media (max-width: 1200px) {
+    .playground-layout {
+        /* Stack all columns vertically on small screens */
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+        padding-top: 100px;
+    }
+    #query-interface, #verification-visual, #response-panel {
+        grid-column: 1 / -1;
+        grid-row: auto;
+    }
+}
+/* frontend/styles/layout.css - APPEND TO END */
+
+/* =======================================================
+   5. VERIFICATION PAGE LAYOUT
+   ======================================================= */
+/* frontend/styles/layout.css */
+
+.verification-layout {
+    padding-top: 100px;
+    max-width: 800px;
+    margin: 0 auto;         /* Center it */
+    min-height: 100vh;      /* Allow it to grow */
+    height: auto;           /* Remove fixed height constraints */
+    padding-bottom: 150px;  /* Extra space at bottom so data isn't cut off */
+    overflow-y: visible;    /* Allow content to spill down */
+}
+
+/* Force body to scroll */
+body, html {
+    overflow-y: auto !important;
+    height: auto !important;
+}
+#proof-input-area {
+    padding: var(--space-xl);
+    margin-bottom: var(--space-lg);
+}
+
+.large-input {
+    font-size: 1.1rem;
+    padding: 15px 20px;
+}
+
+.verify-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.verify-actions {
+    display: flex;
+    gap: var(--space-md);
+    margin-top: var(--space-md);
+}
+
+.verify-actions .btn {
+    flex-grow: 1;
+}
+
+/* Loader Styling (reusable) */
+.verification-loader {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-sm);
+    padding: var(--space-md);
+    color: var(--color-neon-blue);
+}
+
+.loader-spinner {
+    border: 4px solid rgba(0, 240, 255, 0.2);
+    border-top: 4px solid var(--color-neon-blue);
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.hint-text {
+    padding: var(--space-xl) 0;
+    color: var(--color-text-secondary);
+    font-size: 1rem;
+    border: 1px dashed var(--color-glass-border);
+    border-radius: var(--radius-lg);
+    margin-top: var(--space-lg);
+}
+
+/* Mobile adjustments */
+@media (max-width: 600px) {
+    .verify-actions {
+        flex-direction: column;
+    }
+}
+/* frontend/styles/layout.css - APPEND TO END */
+
+/* =======================================================
+   6. DEVELOPER DOCS LAYOUT (Stripe/OpenAI Style)
+   ======================================================= */
+
+.docs-layout {
+    display: grid;
+    /* Two columns: 250px for sidebar, rest for content */
+    grid-template-columns: 250px 1fr;
+    gap: var(--space-xl);
+    max-width: 1400px;
+    margin: var(--space-xl) auto;
+    padding-top: 50px; /* Space below navbar */
+}
+
+/* 1. Sticky Sidebar */
+.docs-sidebar {
+    position: sticky;
+    top: 100px; /* Sticky position below the fixed navbar */
+    height: calc(100vh - 120px); /* Height minus margins */
+    overflow-y: auto;
+    padding: var(--space-lg) 0;
+    
+    /* Subtle neon border for emphasis */
+    border-right: 1px solid var(--color-glass-border);
+}
+
+.docs-nav h3 {
+    font-size: 1.1rem;
+    color: var(--color-aqua);
+    margin-top: var(--space-lg);
+    margin-bottom: var(--space-sm);
+}
+
+.docs-nav ul {
+    list-style: none;
+    padding: 0;
+}
+
+.docs-nav a {
+    display: block;
+    padding: 6px 0;
+    font-size: 0.95rem;
+    color: var(--color-text-secondary);
+    transition: color var(--transition-speed-fast), border-left 0.2s;
+    border-left: 2px solid transparent;
+}
+
+.docs-nav a:hover, .docs-nav a.active {
+    color: var(--color-text-primary);
+    border-left: 2px solid var(--color-neon-blue);
+    padding-left: 10px;
+    text-shadow: none;
+}
+
+/* 2. Main Documentation Content */
+.docs-content {
+    padding-right: var(--space-lg);
+}
+
+.doc-section {
+    padding: var(--space-xl) 0;
+    border-bottom: 1px solid var(--color-glass-border);
+}
+
+.doc-heading {
+    font-size: 2rem;
+    color: var(--color-text-primary);
+    margin-top: var(--space-md);
+}
+
+.doc-subheading {
+    font-size: 1.3rem;
+    color: var(--color-neon-blue);
+    margin-top: var(--space-lg);
+}
+
+.endpoint-detail {
+    font-style: italic;
+    color: var(--color-text-secondary);
+}
+
+/* Mobile Responsiveness for Docs */
+@media (max-width: 1000px) {
+    .docs-layout {
+        grid-template-columns: 1fr; /* Stack sidebar and content */
+        gap: var(--space-lg);
+    }
+    .docs-sidebar {
+        position: relative; /* Un-sticky the sidebar */
+        top: 0;
+        height: auto;
+        border-right: none;
+        border-bottom: 1px solid var(--color-glass-border);
+        padding: var(--space-md);
+    }
+    .docs-content {
+        padding-right: var(--space-md);
+        padding-left: var(--space-md);
+    }
+}
+/* frontend/styles/layout.css - APPEND TO END */
+
+/* =======================================================
+   7. HISTORY LOG LAYOUT
+   ======================================================= */
+
+.history-layout {
+    padding-top: 100px; 
+    max-width: 1200px;
+}
+
+.history-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--space-md) var(--space-lg);
+    margin-bottom: var(--space-lg);
+}
+
+#search-query {
+    width: 350px;
+}
+
+.filter-group {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+}
+
+.filter-label {
+    font-size: 0.9rem;
+    color: var(--color-neon-blue);
+}
+
+.filter-select {
+    min-width: 120px;
+    padding: 8px 12px;
+}
+
+/* =======================================================
+   8. HISTORY TABLE STYLING (Data Grid)
+   ======================================================= */
+.history-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    font-family: var(--font-family-sans);
+    background: rgba(10, 10, 25, 0.4); /* Subtle glass table background */
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+}
+
+.history-table thead {
+    background: rgba(255, 255, 255, 0.05);
+    border-bottom: 2px solid var(--color-electric-purple);
+}
+
+.history-table th {
+    text-align: left;
+    padding: var(--space-md) var(--space-lg);
+    font-size: 0.85rem;
+    color: var(--color-neon-blue);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.history-table td {
+    padding: var(--space-md) var(--space-lg);
+    border-bottom: 1px solid var(--color-glass-border);
+    font-size: 0.95rem;
+}
+
+.history-table tbody tr:hover {
+    background: rgba(0, 240, 255, 0.05);
+    cursor: pointer;
+}
+
+/* Status Cell Styling */
+.item-status {
+    font-family: var(--font-family-mono);
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.status-success {
+    color: var(--color-success);
+}
+.status-failed {
+    color: var(--color-error);
+}
+.status-pending {
+    color: var(--color-warning);
+}
+
+.btn-view-proof {
+    padding: 6px 12px;
+}
+
+/* Mobile Responsiveness for Table */
+@media (max-width: 900px) {
+    .history-controls {
+        flex-direction: column;
+        align-items: stretch;
+        gap: var(--space-md);
+    }
+    #search-query {
+        width: 100%;
+    }
+    .filter-group {
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+    
+    /* Hide some columns on small screens to prevent overflow */
+    .history-table thead, .history-table tbody, .history-table th, .history-table td, .history-table tr {
+        display: block;
+    }
+    
+    /* Collapse the table structure for better mobile view */
+    .history-table thead tr {
+        display: none;
+    }
+
+    .history-table tbody tr {
+        border: 1px solid var(--color-glass-border);
+        border-radius: var(--radius-sm);
+        margin-bottom: var(--space-md);
+        padding: var(--space-sm);
+    }
+    
+    .history-table td {
+        border: none;
+        padding: 5px 0;
+        text-align: right;
+        padding-left: 50%; /* Space for the pseudo-element label */
+        position: relative;
+    }
+
+    /* Use pseudo-elements to show column headers on mobile */
+    .history-table td::before {
+        content: attr(class) ": "; /* This needs custom JS/data attributes for real labels, but this is a placeholder */
+        content: attr(data-label); /* Better approach with data attributes (will require JS) */
+        position: absolute;
+        left: 6px;
+        width: 45%;
+        padding-right: 10px;
+        white-space: nowrap;
+        font-weight: 700;
+        color: var(--color-neon-blue);
+        font-family: var(--font-family-mono);
+        text-align: left;
+    }
+}
+/* frontend/styles/layout.css - APPEND TO END */
+
+/* =======================================================
+   9. DASHBOARD / COCKPIT LAYOUT
+   ======================================================= */
+
+.dashboard-layout {
+    padding-top: 100px;
+    max-width: 1400px;
+}
+
+/* --- 1. Metric Grid --- */
+.metric-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-lg);
+    margin-bottom: var(--space-xl);
+}
+
+.metric-card {
+    padding: var(--space-xl);
+    text-align: left;
+}
+
+.metric-icon {
+    font-size: 2rem;
+    margin-bottom: var(--space-sm);
+    display: block;
+}
+
+.metric-value {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--color-electric-purple);
+    text-shadow: var(--glow-purple-light);
+}
+
+.metric-label {
+    font-size: 0.9rem;
+    color: var(--color-text-secondary);
+    margin-top: 5px;
+}
+
+.metric-change {
+    font-size: 0.8rem;
+    font-weight: 600;
+    padding: 2px 6px;
+    border-radius: var(--radius-sm);
+    display: inline-block;
+    margin-top: var(--space-sm);
+}
+
+/* --- 2. Main Dashboard Grid --- */
+.dashboard-grid {
+    display: grid;
+    /* Two columns: 2.5 parts for the main chart, 1 part for the sidebar */
+    grid-template-columns: 2.5fr 1fr; 
+    gap: var(--space-lg);
+}
+
+.usage-chart-panel {
+    grid-column: 1 / 2; /* Spans the first column */
+    height: 450px;
+    padding: var(--space-xl);
+}
+
+.api-key-panel {
+    grid-column: 2 / 3; /* Spans the second column */
+    padding: var(--space-xl);
+}
+
+.agent-log-panel {
+    grid-column: 1 / -1; /* Spans both columns */
+    padding: var(--space-xl);
+    margin-bottom: var(--space-xl);
+}
+
+/* Chart Area Placeholder */
+.chart-area {
+    height: 300px;
+    background: rgba(0, 0, 0, 0.4);
+    border: 1px dashed var(--color-glass-border);
+    margin-top: var(--space-lg);
+    border-radius: var(--radius-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.chart-placeholder p {
+    color: var(--color-neon-blue);
+}
+
+/* API Key Display */
+.api-key-display {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    margin: var(--space-md) 0;
+    padding: var(--space-md);
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: var(--radius-sm);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.key-label {
+    font-size: 0.8rem;
+    color: var(--color-aqua);
+}
+
+.key-value {
+    font-size: 1rem;
+    color: var(--color-text-primary);
+    flex-grow: 1;
+}
+
+.key-tip {
+    font-size: 0.8rem;
+    color: var(--color-text-secondary);
+    margin-bottom: var(--space-lg);
+}
+
+.key-actions {
+    display: flex;
+    justify-content: space-between;
+}
+
+/* Agent Log Panel */
+.log-output {
+    height: 200px;
+    overflow-y: scroll;
+    padding: var(--space-md);
+    background: rgba(0, 0, 0, 0.4);
+    border-radius: var(--radius-sm);
+    line-height: 1.6;
+    margin-top: var(--space-md);
+}
+
+.log-output p {
+    font-size: 0.9rem;
+}
+.log-output .status-error { color: var(--color-error); }
+.log-output .status-pending { color: var(--color-warning); }
+
+
+/* Mobile Responsiveness */
+@media (max-width: 900px) {
+    .metric-grid {
+        grid-template-columns: 1fr; /* Stack metrics */
+    }
+    .dashboard-grid {
+        grid-template-columns: 1fr; /* Stack panels */
+    }
+    .usage-chart-panel, .api-key-panel, .agent-log-panel {
+        grid-column: 1 / -1;
+    }
+}
+/* frontend/styles/layout.css - APPEND TO END */
+
+/* =======================================================
+   10. MINT NFT LAYOUT
+   ======================================================= */
+
+.mint-layout {
+    padding-top: 100px;
+    max-width: 1000px;
+}
+
+.mint-grid {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr; /* Preview is slightly larger */
+    gap: var(--space-lg);
+    margin-top: var(--space-xl);
+}
+
+.mint-controls-panel {
+    padding: var(--space-xl);
+}
+
+/* --- NFT Preview Card Visuals --- */
+.nft-card-visual {
+    width: 100%;
+    aspect-ratio: 1 / 1; /* Square NFT */
+    border-radius: var(--radius-lg);
+    background: linear-gradient(135deg, rgba(178, 80, 255, 0.4), rgba(0, 240, 255, 0.4));
+    border: 3px solid var(--color-neon-blue);
+    box-shadow: 0 0 30px rgba(0, 240, 255, 0.5), inset 0 0 10px rgba(178, 80, 255, 0.8);
+    margin-bottom: var(--space-md);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.nft-content-area {
+    text-align: center;
+    padding: var(--space-lg);
+    background: rgba(0, 0, 0, 0.6);
+    border-radius: var(--radius-sm);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.nft-asset {
+    font-size: 1.2rem;
+    color: var(--color-text-primary);
+    text-shadow: var(--glow-blue-light);
+}
+
+.nft-value {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--color-aqua);
+    margin: var(--space-sm) 0;
+}
+
+.nft-proof-id {
+    font-size: 0.9rem;
+    color: var(--color-text-secondary);
+}
+
+.nft-verified-stamp {
+    display: inline-block;
+    margin-top: var(--space-md);
+    padding: 5px 10px;
+    background: var(--color-success);
+    color: var(--color-black);
+    font-weight: 700;
+    font-size: 0.8rem;
+    border-radius: 2px;
+}
+
+.nft-metadata {
+    padding: var(--space-md);
+    margin-top: var(--space-md);
+    font-size: 0.9rem;
+}
+.nft-metadata p {
+    color: var(--color-text-secondary);
+    margin-bottom: 5px;
+}
+
+/* Mint Control Specifics */
+.control-group {
+    margin-bottom: var(--space-lg);
+}
+
+.fee-amount {
+    font-size: 2rem;
+    color: var(--color-electric-purple);
+    font-weight: 700;
+    margin-top: var(--space-sm);
+}
+.fee-usd {
+    font-size: 1rem;
+    color: var(--color-text-secondary);
+}
+.small-text {
+    font-size: 0.8rem;
+    color: var(--color-text-secondary);
+    margin-top: 5px;
+}
+.btn-large {
+    width: 100%;
+    padding: 15px 30px;
+    font-size: 1rem;
+    margin-top: var(--space-lg);
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 800px) {
+    .mint-grid {
+        grid-template-columns: 1fr;
+    }
+}
+/* frontend/styles/layout.css - APPEND TO END */
+
+/* =======================================================
+   11. LEGAL PROOFS LAYOUT
+   ======================================================= */
+
+.legal-layout {
+    padding-top: 100px; 
+    max-width: 900px;
+}
+
+#doc-verification-area {
+    padding: var(--space-xl);
+    margin-bottom: var(--space-lg);
+}
+
+.doc-verify-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.upload-zone {
+    border: 3px dashed var(--color-electric-purple);
+    border-radius: var(--radius-lg);
+    padding: var(--space-xl);
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s;
+    background: rgba(178, 80, 255, 0.05);
+}
+
+.upload-zone:hover {
+    background: rgba(178, 80, 255, 0.15);
+    border-color: var(--color-neon-blue);
+}
+
+.upload-icon {
+    width: 40px;
+    height: 40px;
+    color: var(--color-electric-purple);
+    margin-bottom: var(--space-sm);
+}
+
+.upload-text {
+    color: var(--color-text-secondary);
+}
+
+.file-info-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: var(--space-md) 0;
+    padding: var(--space-sm) 0;
+}
+
+.file-name {
+    color: var(--color-aqua);
+    font-size: 0.9rem;
+}
+
+.hash-status-text {
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.hash-status-text.status-pending { color: var(--color-warning); }
+.hash-status-text.status-success { color: var(--color-success); }
+.hash-status-text.status-error { color: var(--color-error); }
+
+.hash-output-group {
+    margin-top: var(--space-md);
+}
+
+.result-heading {
+    border-left: 5px solid var(--color-aqua);
+    padding-left: var(--space-md);
+    margin-bottom: var(--space-lg);
+}
+
+/* Compliance Status Card (The final visual verdict) */
+.compliance-status-card {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    padding: var(--space-xl);
+    margin-top: var(--space-lg);
+    border-radius: var(--radius-lg);
+    box-shadow: 0 0 25px rgba(0, 0, 0, 0.4);
+}
+
+.compliance-status-card .status-icon {
+    width: 40px;
+    height: 40px;
+    font-size: 2rem;
+}
+
+.status-details h3 {
+    font-size: 1.5rem;
+    margin-bottom: 5px;
+}
+
+/* Status specific colors */
+.compliance-status-card.verified {
+    border-left: 5px solid var(--color-success);
+    box-shadow: 0 0 15px rgba(74, 254, 190, 0.5);
+}
+.compliance-status-card.verified h3 { color: var(--color-success); }
+
+.compliance-status-card.mismatch {
+    border-left: 5px solid var(--color-error);
+    box-shadow: 0 0 15px rgba(255, 85, 85, 0.5);
+}
+.compliance-status-card.mismatch h3 { color: var(--color-error); }
+/* frontend/styles/layout.css - APPEND TO END */
+
+/* =======================================================
+   12. ACCOUNTING / AUDIT LAYOUT
+   ======================================================= */
+
+.accounting-layout {
+    padding-top: 100px; 
+    max-width: 1200px;
+}
+
+/* Reusing metric-grid from dashboard */
+
+#audit-visualization-panel {
+    padding: var(--space-xl);
+    margin-bottom: var(--space-lg);
+}
+
+.control-bar {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    margin-bottom: var(--space-md);
+}
+
+.chart-container {
+    position: relative;
+    height: 400px; /* Define fixed height for the chart */
+    background: rgba(0, 0, 0, 0.4);
+    border: 1px dashed var(--color-neon-blue);
+    border-radius: var(--radius-md);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    /* Chart.js would render on the canvas element, but we use placeholder for now */
+}
+
+/* Hiding the actual canvas element for the placeholder visualization */
+#audit-trail-chart {
+    display: none; 
+}
+
+.log-output {
+    height: 180px;
+    overflow-y: scroll;
+    padding: var(--space-md);
+    background: rgba(0, 0, 0, 0.4);
+    border-radius: var(--radius-sm);
+    line-height: 1.6;
+    margin-top: var(--space-md);
+}
+
+.log-output p {
+    font-size: 0.9rem;
+    color: var(--color-text-primary);
+}
