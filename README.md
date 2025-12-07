@@ -2,6 +2,11 @@
 
 ![TruthMint Banner](https://via.placeholder.com/1200x300/667eea/ffffff?text=TruthMint+-+Truth+as+a+Currency)
 
+
+video link: "https://drive.google.com/file/d/1jLzbxadoX5mRCNA7gg_V34l1Z9mir3e_/view?usp=sharing"
+
+ppt: "https://docs.google.com/presentation/d/1u_DjkV8C2UumHH37DrDHV2eH0m6mL6Tg/edit?usp=sharing&ouid=109399514300700508541&rtpof=true&sd=true"
+
 ## 🎯 Overview
 
 **TruthMint** transforms AI-generated factual claims into NFTs backed by verifiable truth using Flare blockchain's decentralized data infrastructure. Users can own, collect, and trade verified knowledge.
